@@ -1,0 +1,33 @@
+// 引入响应式
+@import "maxer.media";
+// 引入基础库
+@import "maxer.base";
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+/*-----------响应式开始-----------------*/
+$maxer-medias: (
+        xs: 768px,
+        sm: 768px,
+        md: 992px,
+        lg: 1200px
+);
+
+
+@media (min-width: map-get($maxer-medias,lg)) {
+  @include lg
+}
+@media (min-width: map-get($maxer-medias,md)) and (max-width: map-get($maxer-medias,lg)){
+  @include md
+}
+@media (min-width: map-get($maxer-medias,sm)) and (max-width: map-get($maxer-medias,md)){
+  @include sm
+}
+@media (max-width: map-get($maxer-medias,xs)){
+  @include xs
+}
+
+/*-----------响应式结束-----------------*/

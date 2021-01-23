@@ -4,6 +4,7 @@ import router from './router'
 import store from './store'
 import installElementPlus from './plugins/element'
 import {ElMessage, ElNotification} from "element-plus";
+import './assets/scss/maxer.core.scss'
 
 // 声明全局组件
 declare module '@vue/runtime-core' {

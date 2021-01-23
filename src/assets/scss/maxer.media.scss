@@ -1,0 +1,27 @@
+@mixin xs(){
+  // 当设备宽度 < 768px 一般指手机设备
+  .maxer-container{
+    max-width: 540px;
+  }
+}
+
+@mixin sm(){
+  // 当设备宽度 ≥ 768px 一般指平板设备
+  .maxer-container{
+    max-width: 720px;
+  }
+}
+
+@mixin md(){
+  // 当设备宽度 ≥ 992px 一般指中型台式机
+  .maxer-container{
+    max-width: 960px;
+  }
+}
+
+@mixin lg(){
+  // 当设备宽度 ≥ 1200px 一般指大型台式机
+  .maxer-container{
+    max-width: 1140px;
+  }
+}

@@ -1,40 +1,32 @@
 <template>
-  <img src="./assets/logo.png">
-  <div>
-    <p>
-      If Element Plus is successfully added to this project, you'll see an
-      <code v-text="'<el-button>'"></code>
-      below
-    </p>
-    <el-button type="primary">el-button</el-button>
-    <div class="flex jc-c">
-      <router-link to="/">首页</router-link>
-      <router-link to="/about">关于</router-link>
-    </div>
+  <HeaderNav/>
+  <div class="maxer-container">
+    测试容器大小
   </div>
   <router-view/>
 </template>
 
-<script>
+<script lang="ts">
+import {defineComponent} from 'vue'
+import HeaderNav from "@/components/HeaderNav.vue";
 
-
-export default {
+export default defineComponent({
   name: 'App',
-}
+  components:{HeaderNav}
+})
 </script>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
 
 <style lang="scss">
+
+
 .flex{
   display: flex;
   a{

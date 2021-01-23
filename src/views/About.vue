@@ -7,14 +7,12 @@
 </template>
 
 <script lang="ts">
-import {Vue,Options} from "vue-class-component";
-import TestComponent from "@/components/TestComponent.vue"
-@Options({
+import {defineComponent} from 'vue'
+import TestComponent from "@/components/TestComponent.vue";
+export default defineComponent({
+  name: 'About',
   components:{
     TestComponent
   }
 })
-export default class About extends Vue{
-
-}
 </script>
