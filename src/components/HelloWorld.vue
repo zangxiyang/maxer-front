@@ -59,14 +59,12 @@ export default class HelloWorld extends Vue {
     return "ce" + this.numberVar;
   }
   public mounted(): void{
-    alert("挂载成功");
     this.initVar = "测试";
     this.numberVar = -this.numberVar;
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 h3 {
   margin: 40px 0 0;

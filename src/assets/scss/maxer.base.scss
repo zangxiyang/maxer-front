@@ -1,3 +1,46 @@
 .maxer-container{
   margin: 0 auto;
 }
+.flex{
+  display: flex;
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: -moz-flex;
+}
+.f-jc-c{
+  @extend .flex;
+  justify-content: center;
+  -webkit-justify-content: center;
+}
+.f-jc-sb{
+  @extend .flex;
+  justify-content: space-between;
+  -webkit-justify-content: space-between;
+}
+.f-jc-sa{
+  @extend .flex;
+  justify-content: space-around;
+  -webkit-justify-content: space-around;
+}
+.al-c{
+  align-items: center;
+  -webkit-align-items: center;
+}
+.al-b{
+  align-items: baseline;
+  -webkit-align-items: baseline;
+}
+
+.ml-5{
+  margin-left: 5px;
+}
+.ml-10{
+  margin-left: 10px;
+}
+.mr-5{
+  margin-right: 5px;
+}
+.mr-10{
+  margin-right: 10px;
+}
