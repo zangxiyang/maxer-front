@@ -34,7 +34,7 @@
           <div>头像</div>
           <div>消息</div>
           <div>{{vuexIsLogin}}</div>
-          <div>{{vuexTestVar}}</div>
+          <div>{{vuexUser.name}}</div>
         </div>
       </div>
     </nav>
@@ -63,7 +63,7 @@ export default defineComponent({
     // 注册滚动监听
     window.addEventListener("scroll",this.handleScroll);
     // test
-    this.$m.vuex('vuexIsLogin',"这个是修改的变量");
+    this.$m.vuex('vuexUser.test',"123321");
   },
   unmounted() {
     // 移除滚动监听

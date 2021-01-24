@@ -4,6 +4,7 @@ import router from './router'
 import store from './store'
 import installElementPlus from './plugins/element';
 import installMaxerStore, {Maxer} from './store/maxer.mixin'
+import initStorePersistence from './store/store.persistence'
 import {ElMessage, ElNotification} from "element-plus";
 import './assets/scss/maxer.core.scss'
 // 引入iconfont
@@ -24,4 +25,5 @@ const app = createApp(App)
 installElementPlus(app)
 installMaxerStore(app) // 全局混入vuex
 initIconFont() // 初始化iconfont
+initStorePersistence(store) // 初始化持久化vuex
 app.use(store).use(router).mount('#app')

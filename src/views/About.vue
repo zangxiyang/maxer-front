@@ -13,6 +13,9 @@ export default defineComponent({
   name: 'About',
   components:{
     TestComponent
+  },
+  mounted() {
+    this.$m.vuex("vuexUser.name","龚南柯")
   }
 })
 </script>
