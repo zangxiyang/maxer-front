@@ -9,6 +9,8 @@ import {ElMessage, ElNotification} from "element-plus";
 import './assets/scss/maxer.core.scss'
 // 引入iconfont
 import initIconFont from "@/utils/iconFontConfig";
+// 引入animate css
+import 'animate.css'
 
 
 

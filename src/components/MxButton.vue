@@ -1,76 +1,65 @@
 <template>
-  <div class="nav-item" @mouseenter="isHover = true" @mouseleave="isHover = false">
-    <router-link :to="route" active-class="active">
-      <icon-font :name="icon"/>
-      <span>{{ text }}</span>
-      <template v-if="isMore">
+  <div class="maxer-button-container" @mouseenter="hoverIn" @mouseleave="hoverOut">
+    <div class="maxer-button f-jc-c al-c">
+      <span>{{text}}</span>
+      <template v-if="isSub">
         <icon-font name="iconxiangxiafanye" size="10px" left="5px"/>
       </template>
-    </router-link>
-    <div class="nav-item-more-container flex"
-         v-if="isMore" :class="{'show':isHover}"
-         >
-      <div class="more-item flex al-c">跟多</div>
-      <div class="more-item flex al-c">更多</div>
+    </div>
+    <div class="maxer-sub-menu f-jc-c" :class="{'show':isMenuShow}" v-if="isSub">
+      <div class="menu-item flex al-c" v-for="item in subs" :key="item.text">
+        <icon-font :name="item.icon" right="10px"/>
+        <span>{{item.text}}</span>
+      </div>
+
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import {defineComponent} from 'vue'
+import {defineComponent} from 'vue';
 import IconFont from "@/components/IconFont.vue";
 
 export default defineComponent({
-  name: "navItem",
-  components: {
-    IconFont
-  },
-  props: {
-    icon: String,      // 图标
-    route: String,     // 路由
-    text: String,      // 标题
-    isMore: Boolean,   // 是否有二级菜单
-  },
+  name: "MxButton",
+  components: {IconFont},
   data(){
     return{
-      isHover: false
+      isMenuShow: false,
+      isIn: false,
     }
   },
-
+  props: {
+    subs: Array,
+    isSub: Boolean,
+    text: String
+  },
+  methods:{
+    hoverIn(): void{
+      this.isMenuShow = true;
+    },
+    hoverOut(): void{
+        this.isMenuShow = false;
+    }
+  }
 })
 </script>
 
 <style lang="scss" scoped>
 @import "src/assets/scss/maxer.variables";
-
-.nav-item {
+.maxer-button-container{
   position: relative;
-  // 引入的iconfont图标需要外间距
-  .icon {
-    margin-right: 8px;
-  }
-  a {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px 0;
-    width: 100px;
-    color: $maxer-nav-dropdown-item-normal-color;
-    transition: all .3s ease-out;
-    -webkit-transition: all .3s ease-out;
-    // 暂不需要
-    /*&.active{
-      color: $maxer-nav-item-active-color !important;
-    }
-    &:hover {
-      color: $maxer-nav-item-active-color !important;
-      transition: color .3s ease-out;
-      -webkit-transition: color .3s ease-out;
-    }*/
-  }
-  .nav-item-more-container{
+  padding:3px;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  .maxer-sub-menu{
     position: absolute;
+    top: 95%;
+    margin-top: 4px;
+    left: 0;
     min-width: 120px;
+    padding: 3px 0;
     flex-direction: column;
     background-color: $maxer-normal-background-color;
     border-radius: 5px;
@@ -87,13 +76,14 @@ export default defineComponent({
       opacity: 1;
       transform: perspective(600px) rotateX(0deg);
     }
-    .more-item{
+    .menu-item{
       display: flex;
       padding: 8px 12px;
       cursor: pointer;
       color: $maxer-text-normal-color;
       transition: background-color .3s ease-out, color .3s ease-out;
       -webkit-transition: background-color .3s ease-out, color .3s ease-out;
+
       &:hover{
         color: $maxer-a-hover-color;
         background-color: $maxer-hover-default-background-color;
@@ -103,14 +93,4 @@ export default defineComponent({
     }
   }
 }
-.on-top{
-  .nav-item{
-    a{
-      color: $maxer-nav-item-normal-color;
-      transition: all .3s ease-out;
-      -webkit-transition: all .3s ease-out;
-    }
-  }
-}
-
 </style>

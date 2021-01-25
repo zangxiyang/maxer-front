@@ -2,7 +2,7 @@ import { createStore } from 'vuex'
 
 export default createStore({
   state: {
-    vuexIsLogin: false,        // 当前的登录状态
+    vuexIsLogin: true,                   // 当前的登录状态
     vuexTestVar: "这是vuex全局混入的测试变量",
     vuexUser:{
       test: 1,
@@ -27,6 +27,9 @@ export default createStore({
     }
   },
   actions: {
+    $changStoreAsync(context,payload){
+      context.commit('$changeStore',payload);
+    }
   },
   modules: {
   }

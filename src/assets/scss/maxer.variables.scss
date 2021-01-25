@@ -12,5 +12,15 @@ $maxer-article-font-family:0;
 $maxer-code-font-family: Menlo,Monaco,Consolas,monospace;
 
 // 颜色变量
-$maxer-nav-item-normal-color: #666; // 头部导航item常规颜色
+$maxer-nav-item-normal-color: #fff; // 头部导航item常规颜色
 $maxer-nav-item-active-color: rgba(177,84,53,.5); // 头部导航item选中颜色
+$maxer-nav-dropdown-item-normal-color: #343a40;
+$maxer-normal-background-color: rgba(255,255,255,.95);
+$maxer-a-hover-color: #ac633b;
+$maxer-hover-default-background-color: rgba(168, 168, 168, 0.1);
+$maxer-text-normal-color: #111;
+$maxer-dropdown-text-normal-color: #606266; // 下拉框文字默认颜色
+$maxer-dropdown-border-normal-color: #ebeef5; // 下拉框边框默认颜色
+
+$maxer-userName-default-color: #444;
+$maxer-userName-super-color:rgb(251, 114, 153);

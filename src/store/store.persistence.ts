@@ -8,7 +8,6 @@
 import {Store} from "vuex";
 
 export default<T> (store: Store<T>): void=>{
-    console.log("vuex持久化初始化....")
     // 不需要持久化的数据存入sessionStorage
     if (sessionStorage.getItem('store')){
         store.replaceState(

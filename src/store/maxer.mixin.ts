@@ -6,7 +6,7 @@
  * @网站: https://www.imsle.com
  */
 
-import {mapState, useStore} from "vuex";
+import {mapState} from "vuex";
 import store from '@/store/index.ts'
 import {App} from 'vue'
 
@@ -14,8 +14,15 @@ import {App} from 'vue'
 const $mStoreKey = store.state ? Object.keys(store.state) : [];
 export class Maxer{
     vuex = (name: string, value: any): void=>{
-        useStore().commit('$changeStore', {
+        store.commit('$changeStore', {
             name, value
+        })
+    };
+    vuexAsync = (name: string,value: any): void=>{
+        store.dispatch('$changStoreAsync', {
+            name, value
+        }).then(r  =>{
+            console.log(r)
         })
     }
 }

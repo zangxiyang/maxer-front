@@ -23,6 +23,10 @@
   justify-content: space-around;
   -webkit-justify-content: space-around;
 }
+.f-col{
+  flex-direction: column;
+  -webkit-flex-direction: column;
+}
 .al-c{
   align-items: center;
   -webkit-align-items: center;
