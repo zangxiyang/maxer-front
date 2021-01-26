@@ -42,20 +42,18 @@
                   :show-arrow="true"
                   popper-class="user-info-container import i"
                   :offset="10"
-                  :open-delay="300"
+                  :show-after="300"
                   :close-delay="450"
               >
                 <template #reference>
-                  <el-badge is-dot type="danger">
+                  <el-badge is-dot type="danger" class="cur-p">
                     <span>消息</span>
                   </el-badge>
                 </template>
                 <div class="message-warp">
-                  消息面板
-                  <pop-nav-item divider 
-                                divider-top
-                                text="测试选项" icon="iconyouxi"
-                                icon-size="16px"/>
+                  <pop-nav-item text="回复我的" icon="iconliaotian1" icon-size="16px" dot-value="999"/>
+                  <pop-nav-item text="我的消息" icon="iconyouxiang" icon-size="16px" dot-value="10"/>
+                  <pop-nav-item text="系统消息" icon="icontongzhi1" icon-size="16px" dot-value="5"/>
                 </div>
               </el-popover>
 
@@ -68,11 +66,12 @@
                 :show-arrow="false"
                 popper-class="user-info-container import i"
                 :offset="0"
+                :show-after="300"
                 :close-delay="450"
             >
               <template #reference>
                 <el-avatar :src="require('@/assets/img/default_user_icon.png')"
-                           shape="circle" class="user-avatar"/>
+                           shape="circle" class="user-avatar cur-p"/>
               </template>
               <div class="info-wrap flex f-col">
                 <div class="f-jc-c">
@@ -117,28 +116,18 @@
 
                 </div>
                 <div class="bottom-navs flex f-col">
-                  <div class="bottom-nav-item flex al-c">
-                    <icon-font name="iconshouye2" right="10px" size="18px"/>
-                    <span>个人中心</span>
-                  </div>
-                  <div class="bottom-nav-item flex al-c">
-                    <icon-font name="iconfukuan" right="10px" size="18px"/>
-                    <span>我的捐助</span>
-                  </div>
-                  <div class="bottom-nav-item flex al-c">
-                    <icon-font name="iconliaotian" right="10px" size="18px"/>
-                    <span>我的微聊</span>
-                  </div>
-                  <div class="bottom-nav-item flex al-c">
-                    <icon-font name="iconqianbao1" right="10px" size="18px"/>
-                    <span>我的钱包</span>
-                  </div>
 
-                  <div class="bottom-nav-item flex al-c divider top" @click="logout">
-                    <icon-font name="iconbianji" right="10px" size="18px"/>
-                    <span>退出登录</span>
-                    <el-badge class="mark" :value="3" />
-                  </div>
+                  <pop-nav-item icon="iconshouye2" text="个人中心"
+                                divider divider-top
+                                icon-size="18px"/>
+                  <pop-nav-item icon-size="18px" text="我的捐助" icon="iconfukuan"/>
+                  <pop-nav-item text="我的微聊" icon="iconliaotian" icon-size="18px"/>
+                  <pop-nav-item text="我的钱包" icon-size="18px" icon="iconqianbao1"/>
+                  <pop-nav-item text="退出登录"
+                                divider divider-top
+                                icon="iconbianji"
+                                icon-size="18px"
+                                @click="logout"/>
                 </div>
               </div>
             </el-popover>
@@ -363,25 +352,6 @@ export default defineComponent({
     // 用户面板底部快捷菜单
     .bottom-navs{
       margin-top: 10px;
-      border-top: 1px solid #eee;
-      .bottom-nav-item{
-        cursor: pointer;
-        padding: 10px 20px;
-        transition: background-color .3s ease-out;
-        -webkit-transition: background-color .3s ease-out;
-        &:hover{
-          background: $maxer-hover-default-background-color;
-          transition: background-color .3s ease-out;
-          -webkit-transition: background-color .3s ease-out;
-        }
-        &.divider{
-          border-bottom: 1px solid #eee;
-          &.top{
-            border-bottom: none;
-            border-top: 1px solid #eee;
-          }
-        }
-      }
     }
   }
 }

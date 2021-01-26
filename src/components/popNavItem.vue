@@ -1,8 +1,16 @@
 <template>
-  <div class="bottom-nav-item flex al-c"
+  <div class="bottom-nav-item f-jc-sb al-c"
        :class="[{'divider':divider},{'top':dividerTop}]">
-    <icon-font :name="icon" right="10px" :size="iconSize"/>
-    <span>{{ text }}</span>
+    <div>
+      <icon-font :name="icon" right="10px" :size="iconSize"/>
+      <span>{{ text }}</span>
+    </div>
+    <template v-if="dotValue">
+      <div class="maxer-dot maxer-dot-danger">
+        {{dotValue}}
+      </div>
+<!--      <el-badge :value="10" type="warning"/>-->
+    </template>
     <slot/>
   </div>
 
@@ -20,7 +28,8 @@ export default defineComponent({
     icon: String,
     iconSize: String,
     divider: Boolean,
-    dividerTop: Boolean
+    dividerTop: Boolean,
+    dotValue: Number
   }
 })
 </script>
@@ -47,6 +56,17 @@ export default defineComponent({
       border-bottom: none;
       border-top: 1px solid #eee;
     }
+  }
+}
+
+.maxer-dot{
+  color: #fff;
+  font-size: 12px;
+  padding: 1px 7px;
+  border-radius: 8px;
+  text-align: center;
+  &.maxer-dot-danger{
+    background-color: $maxer-danger-color;
   }
 }
 </style>
