@@ -1,12 +1,27 @@
 <template>
+  <header id="maxer-home-header" style="background: rgb(64,78,90)">
+    <div class="header-bg-mask-container">
+      <div class="bg-mask animate__animated animate__fadeIn animate__slow"
+           v-for="item in carousel.items" :key="item.id"
+           :style="[{backgroundImage:`url(${item.image})`}
+           ,{display: carousel.index === item.id? 'block':'none'}]"></div>
+    </div>
+    <div class="header-bg-mask-container over">
+
+    </div>
+
+    <div class="maxer-container">
+      <div class="carousel-wrap">
+        <maxer-carousel v-model:carousel-index="carousel.index"
+                        :items="carousel.items"/>
+      </div>
+    </div>
+  </header>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
-    {{flag}}
-    <div class="maxer-container">
-      <maxer-carousel v-model:carousel-index="carousel.index"
-                      :items="carousel.items"/>
-    </div>
+    {{ flag }}
+
   </div>
   <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
   <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
@@ -17,19 +32,19 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import {defineComponent} from 'vue';
 import HelloWorld from '@/components/HelloWorld.vue';
 import MaxerCarousel, {CarouselItems} from "@/components/MaxerCarousel.vue"; // @ is an alias to /src
 
 
 export default defineComponent({
   name: 'Home',
-  data(){
-    return{
+  data() {
+    return {
       flag: '这是一个标识',
-      carousel:{
+      carousel: {
         index: 0, // 走马灯起始索引 - 双向绑定
-        items:[
+        items: [
           {
             id: 0,
             title: '群星闪耀，终不过一曲清欢',
@@ -50,12 +65,51 @@ export default defineComponent({
 
     }
   },
-  components:{
+  components: {
     MaxerCarousel,
     HelloWorld
   }
 })
 </script>
 <style lang="scss" scoped>
+$maxer-home-header-height: 480px +  20px;
+#maxer-home-header {
+  box-sizing: border-box;
+  position: relative;
+  height: $maxer-home-header-height;
+  width: 100%;
+  overflow: hidden;
 
+  .header-bg-mask-container {
+    height: $maxer-home-header-height;
+    width: 100%;
+    position: absolute;
+    z-index: 1;
+    background-color: #eeeeee;
+
+    &.over {
+      background-image: linear-gradient(135deg, #fdfcfb, #e2d1c3);
+      opacity: .7;
+      z-index: 1;
+    }
+
+    .bg-mask {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center top 5%;
+      z-index: 0;
+      filter: blur(50px);
+      background-repeat: no-repeat;
+      transition: .8s ease-in-out;
+    }
+  }
+
+  .carousel-wrap {
+
+    padding-top: 100px;
+    z-index: 5;
+  }
+}
 </style>

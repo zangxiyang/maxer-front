@@ -1,5 +1,6 @@
 <template>
-  <div class="nav-item" @mouseenter="isHover = true" @mouseleave="isHover = false">
+  <div class="nav-item" @mouseenter="isHover = true" @mouseleave="isHover = false"
+       @click="navOnClick" ref="nav-item">
     <router-link :to="route" active-class="active">
       <icon-font :name="icon"/>
       <span>{{ text }}</span>
@@ -25,17 +26,24 @@ export default defineComponent({
   components: {
     IconFont
   },
+  emits:['click'],
   props: {
     icon: String,      // 图标
     route: String,     // 路由
     text: String,      // 标题
     isMore: Boolean,   // 是否有二级菜单
+    navIndex: Number,  // 索引
   },
   data(){
     return{
       isHover: false
     }
   },
+  methods:{
+    navOnClick(){
+      this.$emit('click',this.navIndex, this.$refs['nav-item'])
+    }
+  }
 
 })
 </script>
@@ -54,19 +62,19 @@ export default defineComponent({
     justify-content: center;
     align-items: center;
     padding: 10px 0;
-    width: 100px;
+    min-width: 100px;
     color: $maxer-nav-dropdown-item-normal-color;
     transition: all .3s ease-out;
     -webkit-transition: all .3s ease-out;
     // 暂不需要
-    /*&.active{
+    &.active{
       color: $maxer-nav-item-active-color !important;
     }
     &:hover {
       color: $maxer-nav-item-active-color !important;
       transition: color .3s ease-out;
       -webkit-transition: color .3s ease-out;
-    }*/
+    }
   }
   .nav-item-more-container{
     position: absolute;
@@ -106,7 +114,7 @@ export default defineComponent({
 .on-top{
   .nav-item{
     a{
-      color: $maxer-nav-item-normal-color;
+      //color: $maxer-nav-item-normal-color;
       transition: all .3s ease-out;
       -webkit-transition: all .3s ease-out;
     }

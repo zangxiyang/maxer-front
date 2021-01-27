@@ -29,6 +29,7 @@
         :preloadImages="false"
         @lazyImageLoad="lazyImageLoadingStart"
         @lazyImageReady="lazyImageLoadingReady"
+        class="animate__animated animate__fadeIn animate__slow"
     >
       <swiper-slide class="maxer-carousel-item" v-for="item in items" :key="item.id">
         <div class="item-back swiper-lazy"
@@ -37,7 +38,7 @@
         <template v-if="!loadedFlags[item.id]">
           <el-skeleton animated style="position: absolute;z-index: 9999">
             <template v-slot:template>
-              <el-skeleton-item variant="image" style="width: 100%; height: 380px;" />
+              <el-skeleton-item variant="image" style="width: 100%; height: 380px;"/>
             </template>
           </el-skeleton>
         </template>
@@ -65,7 +66,7 @@
  * 时间: 2021/1/26
  * 版本: V1
  */
-import {defineComponent, PropType, ref,reactive} from 'vue';
+import {defineComponent, PropType, reactive, ref} from 'vue';
 import {Swiper, SwiperSlide} from "swiper/vue";
 import SwiperCore, {Pagination, Navigation, Autoplay, Lazy} from "swiper";
 import 'swiper/swiper.scss'
@@ -75,7 +76,7 @@ import IconFont from "@/components/IconFont.vue";
 
 SwiperCore.use([Pagination, Navigation, Autoplay, Lazy])
 
-export interface CarouselItems{
+export interface CarouselItems {
   id: number;
   title: string;
   image: string;
@@ -86,7 +87,7 @@ export default defineComponent({
   props: {
     items: {
       type: Array as PropType<CarouselItems[]>,
-      default: ()=>[]
+      default: () => []
     },
     carouselIndex: Number
   },
@@ -95,13 +96,17 @@ export default defineComponent({
     IconFont,
     Swiper, SwiperSlide
   },
-  setup(props){
+  setup(props) {
     // 初始化懒加载标识序列
     const loadedFlags: boolean[] = reactive([]);
-    props.items.forEach(()=>{
+
+    props.items.forEach(() => {
       loadedFlags.push(false)
-    })
-    return{loadedFlags}
+    });
+
+
+    const isFirst = ref(false)
+    return {loadedFlags, isFirst}
   },
   data() {
     return {
@@ -124,16 +129,16 @@ export default defineComponent({
     // 图片延迟加载开始
     lazyImageLoadingStart(swiper: any, slideEl: any) {
       console.log("----延迟加载开始----")
-      console.log(slideEl.childNodes[0].getAttribute('maxer-carousel-index'))
-
+      const index = slideEl.childNodes[0].getAttribute('maxer-carousel-index');
+      this.loadedFlags[index] = false
     },
     // 图片延迟加载结束
     lazyImageLoadingReady(swiper: any, slideEl: any) {
       console.log("----延迟加载完成----")
       const index = slideEl.childNodes[0].getAttribute('maxer-carousel-index');
       console.log(index)
-      setTimeout(()=>this.loadedFlags[index] = true,2000)
-       // 更改标识为 true 代表已经加载完成
+      this.loadedFlags[index] = true
+      // 更改标识为 true 代表已经加载完成
       console.log("---- 完成标识序列 ----")
     }
   }

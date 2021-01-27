@@ -12,21 +12,34 @@
           </div>
           <div class="nav-group">
             <!-- 菜单容器  -->
-            <div class="nav-lists flex al-c">
+            <div class="nav-lists flex al-c" ref="navs">
               <nav-item icon="iconshouye1"
                         text="首页"
-                        route="/"/>
+                        route="/"
+                        :nav-index="0"
+                        @click="navItemOnClick"/>
               <nav-item icon="iconzuopin"
                         text="分类"
-                        route="/about"/>
+                        route="/about"
+                        :nav-index="1"
+                        @click="navItemOnClick"/>
               <nav-item icon="iconwenda"
                         text="微聊"
-                        route="/"/>
+                        route="/"
+                        :nav-index="2"
+                        @click="navItemOnClick"/>
               <nav-item icon="icongengduo"
                         text="更多"
                         route="/"
-                        :is-more="true"/>
+                        :is-more="true"
+                        :nav-index="3"
+                        @click="navItemOnClick"/>
             </div>
+            <!-- 指示器 -->
+            <div class="nav-bottom-indicator"
+                 :style="[{left: `${indicator.left}px`},{width: `${indicator.width}px`}]"></div>
+
+
           </div>
         </div>
         <!--  用户容器  -->
@@ -171,19 +184,41 @@ export default defineComponent({
       // 用户信息 todo vuex保存
       user: {
         nickName: "Seale"
+      },
+      // navItems宽度
+      navItemsWidth:[] as Array<number>,
+      // 指示器相关参数
+      indicator:{
+        width: 0,
+        left: 0
       }
+
     }
   },
   methods: {
     // 监听滚动条
     handleScroll() {
       const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
-      this.isOnTop = scrollTop <= 100;
+      this.isOnTop = scrollTop <= 50;
     },
     // 退出登录
     logout(){
       //TODO
       this.$m.vuex('vuexIsLogin',false);
+    },
+    // item被点击
+    navItemOnClick(index: number){
+      console.log(index)
+      // 计算指示器width
+      const widthIndicator = (this.navItemsWidth[index] - 20);
+      let leftIndicator = 0;
+      leftIndicator += (this.navItemsWidth[index] - widthIndicator) / 2;
+      for (let i = 0 ; i < index; i++){
+        leftIndicator += this.navItemsWidth[index];
+      }
+      this.indicator.width = widthIndicator;
+      this.indicator.left = leftIndicator;
+
     }
   },
   mounted() {
@@ -191,6 +226,12 @@ export default defineComponent({
     window.addEventListener("scroll", this.handleScroll);
     // test
     // this.$m.vuex('vuexIsLogin', true);
+
+    // 计算 header nav item 宽度
+    (this as any).$refs.navs.childNodes.forEach((nav: Element)=>{
+      this.navItemsWidth.push(nav.clientWidth)
+    })
+
   },
   unmounted() {
     // 移除滚动监听
@@ -219,7 +260,7 @@ export default defineComponent({
   -webkit-transition: padding-top .3s ease-out, background-color .3s ease-out;
 
   &.on-top {
-    color: $maxer-nav-item-normal-color;
+    //color: $maxer-nav-item-normal-color;
     padding-top: 5px;
     background: rgba(0, 0, 0, 0);
     backdrop-filter: saturate(100%) blur(0);
@@ -258,10 +299,10 @@ export default defineComponent({
 // 当没有移出可滑动区域时
 .on-top {
   .logo {
-    color: $maxer-nav-item-normal-color;
+    //color: $maxer-nav-item-normal-color;
 
     a {
-      color: $maxer-nav-item-normal-color;
+      //color: $maxer-nav-item-normal-color;
     }
   }
 }
@@ -269,6 +310,17 @@ export default defineComponent({
 .nav-group {
   position: relative;
   font-size: 17px;
+  .nav-bottom-indicator{
+    position: absolute;
+    left: 0;
+    width: 0;
+    bottom: 0;
+    height: 2px;
+    background-color: #777;
+    border-radius: 2px;
+    transition: left .3s ease,width .3s ease,background-color .3s ease;
+    -webkit-transition: left .3s ease,width .3s ease,background-color .3s ease;
+  }
 }
 </style>
 
