@@ -208,7 +208,6 @@ export default defineComponent({
     },
     // item被点击
     navItemOnClick(index: number){
-      console.log(index)
       // 计算指示器width
       const widthIndicator = (this.navItemsWidth[index] - 20);
       let leftIndicator = 0;
@@ -218,7 +217,6 @@ export default defineComponent({
       }
       this.indicator.width = widthIndicator;
       this.indicator.left = leftIndicator;
-
     }
   },
   mounted() {
@@ -231,6 +229,9 @@ export default defineComponent({
     (this as any).$refs.navs.childNodes.forEach((nav: Element)=>{
       this.navItemsWidth.push(nav.clientWidth)
     })
+    // 默认指向首页
+    this.indicator.width = this.navItemsWidth[0] - 20;
+    this.indicator.left = (this.navItemsWidth[0] - this.indicator.width) / 2;
 
   },
   unmounted() {
