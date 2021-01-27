@@ -51,9 +51,9 @@
                   </el-badge>
                 </template>
                 <div class="message-warp">
-                  <pop-nav-item text="回复我的" icon="iconliaotian1" icon-size="16px" dot-value="999"/>
-                  <pop-nav-item text="我的消息" icon="iconyouxiang" icon-size="16px" dot-value="10"/>
-                  <pop-nav-item text="系统消息" icon="icontongzhi1" icon-size="16px" dot-value="5"/>
+                  <pop-nav-item text="回复我的" icon="iconliaotian1" icon-size="16px" :dot-value="999"/>
+                  <pop-nav-item text="我的消息" icon="iconyouxiang" icon-size="16px" :dot-value="10"/>
+                  <pop-nav-item text="系统消息" icon="icontongzhi1" icon-size="16px" :dot-value="5"/>
                 </div>
               </el-popover>
 
