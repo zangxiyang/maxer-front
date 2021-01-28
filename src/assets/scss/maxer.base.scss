@@ -26,6 +26,7 @@
 .f-col{
   flex-direction: column;
   -webkit-flex-direction: column;
+  -webkit-box-orient: vertical;
 }
 .al-c{
   align-items: center;
@@ -34,6 +35,11 @@
 .al-b{
   align-items: baseline;
   -webkit-align-items: baseline;
+}
+.f-wrap{
+  flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
 }
 
 .ml-5{
@@ -47,6 +53,12 @@
 }
 .mr-10{
   margin-right: 10px;
+}
+.mt-10{
+  margin-top: 10px;
+}
+.mt-5{
+  margin-top: 5px;
 }
 .p-10{
   padding: 10px;

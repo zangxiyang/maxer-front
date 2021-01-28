@@ -11,6 +11,8 @@ import './assets/scss/maxer.core.scss'
 import initIconFont from "@/utils/iconFontConfig";
 // 引入animate css
 import 'animate.css'
+// 引入懒加载
+import vueLazyLoad from 'vue3-lazyload'
 
 
 
@@ -28,4 +30,7 @@ installElementPlus(app)
 installMaxerStore(app) // 全局混入vuex
 initIconFont() // 初始化iconfont
 initStorePersistence(store) // 初始化持久化vuex
-app.use(store).use(router).mount('#app')
+app.use(store)
+    .use(router)
+    .use(vueLazyLoad)
+    .mount('#app')

@@ -12,11 +12,27 @@
 
     <div class="maxer-container">
       <div class="carousel-wrap">
-        <maxer-carousel v-model:carousel-index="carousel.index"
-                        :items="carousel.items"/>
+        <maxer-carousel
+            v-model:carousel-index="carousel.index"
+            :items="carousel.items"/>
       </div>
     </div>
   </header>
+  <main id="maxer-home-main">
+    <!-- 内容区域 -->
+    <div class="maxer-container f-jc-sb">
+      <div class="main-container">
+        <post-list></post-list>
+      </div>
+      <div class="aside-container">
+        <!-- 侧边栏 -->
+        <!-- 每日一言 -->
+        <aside-day-sentence/>
+        <!-- 金主 -->
+        <aside-ads/>
+      </div>
+    </div>
+  </main>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
@@ -34,7 +50,10 @@
 <script lang="ts">
 import {defineComponent} from 'vue';
 import HelloWorld from '@/components/HelloWorld.vue';
-import MaxerCarousel, {CarouselItems} from "@/components/MaxerCarousel.vue"; // @ is an alias to /src
+import MaxerCarousel, {CarouselItems} from "@/components/MaxerCarousel.vue";
+import PostList from "@/components/PostList.vue";
+import AsideAds from "@/components/asideAds.vue";
+import AsideDaySentence from "@/components/asideDaySentence.vue"; // @ is an alias to /src
 
 
 export default defineComponent({
@@ -66,6 +85,9 @@ export default defineComponent({
     }
   },
   components: {
+    AsideDaySentence,
+    AsideAds,
+    PostList,
     MaxerCarousel,
     HelloWorld
   }
@@ -73,6 +95,7 @@ export default defineComponent({
 </script>
 <style lang="scss" scoped>
 $maxer-home-header-height: 480px +  20px;
+// header 样式
 #maxer-home-header {
   box-sizing: border-box;
   position: relative;
@@ -87,8 +110,11 @@ $maxer-home-header-height: 480px +  20px;
     z-index: 1;
     background-color: #eeeeee;
 
+    $header-mask-dark: linear-gradient(0deg, #09203f 0, #537895);
+    $header-mask-light: linear-gradient(135deg, #fdfcfb, #e2d1c3);
+
     &.over {
-      background-image: linear-gradient(135deg, #fdfcfb, #e2d1c3);
+      background-image: $header-mask-light;
       opacity: .7;
       z-index: 1;
     }
@@ -110,6 +136,25 @@ $maxer-home-header-height: 480px +  20px;
 
     padding-top: 100px;
     z-index: 5;
+  }
+}
+
+// main 样式
+#maxer-home-main{
+  padding-top: 32px;
+  // 主容器
+  .main-container{
+    width: 700px;
+    padding:24px;
+    border-radius: 10px;
+    background-color: #ececec;
+
+  }
+  // 侧边栏
+  .aside-container{
+    max-width: 324px;
+    padding: 0 24px;
+    flex: 1;
   }
 }
 </style>

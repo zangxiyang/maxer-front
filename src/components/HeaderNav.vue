@@ -22,6 +22,7 @@
                         text="分类"
                         route="/about"
                         :nav-index="1"
+                        is-more
                         @click="navItemOnClick"/>
               <nav-item icon="iconwenda"
                         text="微聊"
