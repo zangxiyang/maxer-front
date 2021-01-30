@@ -10,10 +10,11 @@ import './assets/scss/maxer.core.scss'
 // 引入iconfont
 import initIconFont from "@/utils/iconFontConfig";
 // 引入animate css
-import 'animate.css'
+import 'animate.css';
 // 引入懒加载
-import vueLazyLoad from 'vue3-lazyload'
-
+import vueLazyLoad from 'vue3-lazyload';
+// 替换 nprogress 默认样式
+import '@/assets/css/nprogress.css';
 
 
 // 声明全局组件
