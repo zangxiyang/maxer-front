@@ -42,7 +42,7 @@
       </div>
       <div class="f-jc-c al-c">
         <icon-font name="iconxing" size="25px"/>
-        <span class="mr-5">本站颤颤巍巍的存活了</span>
+        <span class="mr-5">本站颤颤巍巍地存活了</span>
         <span>{{ lifeTime }}</span>
       </div>
     </div>
