@@ -23,6 +23,11 @@
   justify-content: space-around;
   -webkit-justify-content: space-around;
 }
+.f-jc-r{
+  @extend .flex;
+  justify-content: flex-end;
+  -webkit-justify-content: flex-end;
+}
 .f-col{
   flex-direction: column;
   -webkit-flex-direction: column;
@@ -68,4 +73,24 @@
 }
 .cur-p{
   cursor: pointer;
+}
+
+/*maxer self scss*/
+.maxer-border-button{
+  @extend .f-jc-c;
+  @extend .al-c;
+  font-size: 13px;
+  padding: 3px 8px;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: pointer;
+  border-radius: 5px;
+  color: #888;
+  border: 2px solid #888;
+  transition: all .3s ease-out;
+  -webkit-transition: all .3s ease-out;
+  &:hover{
+    border-color: #111;
+    color: #111;
+  }
 }

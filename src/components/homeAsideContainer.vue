@@ -32,9 +32,8 @@ export default defineComponent({
   padding: 10px;
   position: relative;
   border-radius: 10px;
-  border-bottom-right-radius: 0 !important;
-  border-bottom-left-radius: 0 !important;
-  background-color: #ececec;
+  //background-color: #ececec;
+  background-color: #f9f9f9;
   margin-bottom: 15px;
 
   &:last-child{
@@ -44,7 +43,7 @@ export default defineComponent({
     user-select: none;
     -webkit-user-select: none;
     padding: 6px;
-    border-bottom: 1px solid #dedede;
+    border-bottom: 1px solid #eaeaea;
     span{
       font-size: 18px;
       font-weight: 600;

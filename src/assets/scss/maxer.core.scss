@@ -16,9 +16,13 @@ a{
   color: #111;
   text-decoration: none;
 }
+::selection {
+  color: #fff;
+  background: #c68556;
+}
 
 body{
-  background: #f5f5f5;
+  background: #eee;
 }
 
 /*--------------- 字体设置开始 ----------------*/

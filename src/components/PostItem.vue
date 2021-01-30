@@ -1,7 +1,7 @@
 <template>
-  <div class="maxer-post-item flex f-col">
+  <div class="maxer-post-item flex f-col" :loading="postInfoLoading">
     <div class="post-cover">
-      <el-skeleton animated :loading="coverLoading">
+      <el-skeleton animated :loading="coverLoading || isSkeleton">
         <template #template>
           <el-skeleton-item variant="image" class="cover"/>
         </template>
@@ -13,7 +13,7 @@
       </el-skeleton>
 
     </div>
-    <el-skeleton animated :loading="postInfoLoading">
+    <el-skeleton animated :loading="postInfoLoading || isSkeleton">
       <template v-slot:template>
         <div class="post-info">
           <div class="post-title">
@@ -99,6 +99,12 @@ import IconFont from "@/components/IconFont.vue";
 export default defineComponent({
   name: "PostItem",
   components: {IconFont},
+  props:{
+    isSkeleton: {
+      type: Boolean,
+      default: false
+    }
+  },
   data() {
     return {
       coverLoading: true,
@@ -124,6 +130,10 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+.maxer-post-item[loading='true']:hover{
+  background-color: transparent;
+  cursor: not-allowed;
+}
 .maxer-post-item {
   border-radius: 16px;
   margin: 8px 0;
@@ -131,7 +141,7 @@ export default defineComponent({
   transition: all .3s ease-out;
 
   &:hover {
-    background-color: #f7f7f8;
+    background-color: #f1f1f1;
     cursor: pointer;
   }
 

@@ -1,7 +1,11 @@
 <template>
   <HeaderNav/>
 
-  <router-view/>
+  <router-view v-slot="{ Component }">
+    <keep-alive>
+      <component :is="Component"/>
+    </keep-alive>
+  </router-view>
 </template>
 
 <script lang="ts">
@@ -15,7 +19,5 @@ export default defineComponent({
 </script>
 
 <style>
-body{
-  background: #84a3f7;
-}
+
 </style>

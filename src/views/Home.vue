@@ -28,32 +28,25 @@
         <!-- 侧边栏 -->
         <!-- 每日一言 -->
         <aside-day-sentence/>
+        <!-- 最新评论 -->
+        <aside-comments/>
         <!-- 金主 -->
         <aside-ads/>
       </div>
     </div>
   </main>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
-    {{ flag }}
-
-  </div>
-  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+  <!-- 页脚 -->
+  <Footer/>
 </template>
 
 <script lang="ts">
 import {defineComponent} from 'vue';
-import HelloWorld from '@/components/HelloWorld.vue';
 import MaxerCarousel, {CarouselItems} from "@/components/MaxerCarousel.vue";
 import PostList from "@/components/PostList.vue";
 import AsideAds from "@/components/asideAds.vue";
-import AsideDaySentence from "@/components/asideDaySentence.vue"; // @ is an alias to /src
+import AsideDaySentence from "@/components/asideDaySentence.vue";
+import AsideComments from "@/components/asideComments.vue";
+import Footer from "@/components/Footer.vue"; // @ is an alias to /src
 
 
 export default defineComponent({
@@ -85,11 +78,12 @@ export default defineComponent({
     }
   },
   components: {
+    Footer,
+    AsideComments,
     AsideDaySentence,
     AsideAds,
     PostList,
-    MaxerCarousel,
-    HelloWorld
+    MaxerCarousel
   }
 })
 </script>
@@ -140,20 +134,23 @@ $maxer-home-header-height: 480px +  20px;
 }
 
 // main 样式
-#maxer-home-main{
+#maxer-home-main {
   padding-top: 32px;
+  padding-bottom: 20px;
   // 主容器
-  .main-container{
-    width: 700px;
-    padding:24px;
+  .main-container {
+    min-width: 700px;
+    flex: 1;
+    margin-right: 24px;
+    padding: 24px;
     border-radius: 10px;
-    background-color: #ececec;
-
+    //background-color: #ececec;
+    background-color: #f9f9f9;
   }
+
   // 侧边栏
-  .aside-container{
-    max-width: 324px;
-    padding: 0 24px;
+  .aside-container {
+    max-width: 350px;
     flex: 1;
   }
 }

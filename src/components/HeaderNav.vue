@@ -18,22 +18,27 @@
                         route="/"
                         :nav-index="0"
                         @click="navItemOnClick"/>
+              <nav-item icon="iconicon9"
+                        :nav-index="1"
+                        route="/"
+                        text="文章"
+                        @click="navItemOnClick"/>
               <nav-item icon="iconzuopin"
                         text="分类"
                         route="/about"
-                        :nav-index="1"
+                        :nav-index="2"
                         is-more
                         @click="navItemOnClick"/>
               <nav-item icon="iconwenda"
                         text="微聊"
                         route="/"
-                        :nav-index="2"
+                        :nav-index="3"
                         @click="navItemOnClick"/>
               <nav-item icon="icongengduo"
                         text="更多"
                         route="/"
                         :is-more="true"
-                        :nav-index="3"
+                        :nav-index="4"
                         @click="navItemOnClick"/>
             </div>
             <!-- 指示器 -->
@@ -95,7 +100,7 @@
                 <div class="header-user-info f-jc-c al-c f-col">
                   <!-- 用户信息 -->
                   <div class="header-user-name super flex al-c">
-                    {{user.nickName}}
+                    {{ user.nickName }}
                   </div>
                   <!-- 头衔Icon -->
                   <div class="header-user-icons">
@@ -165,6 +170,7 @@ import NavItem from "@/components/navItem.vue";
 import MxButton from "@/components/MxButton.vue";
 import IconFont from "@/components/IconFont.vue";
 import PopNavItem from "@/components/popNavItem.vue";
+
 export default defineComponent({
   name: 'HeaderNav',
   components: {PopNavItem, IconFont, MxButton, NavItem},
@@ -187,9 +193,9 @@ export default defineComponent({
         nickName: "Seale"
       },
       // navItems宽度
-      navItemsWidth:[] as Array<number>,
+      navItemsWidth: [] as Array<number>,
       // 指示器相关参数
-      indicator:{
+      indicator: {
         width: 0,
         left: 0
       }
@@ -203,17 +209,17 @@ export default defineComponent({
       this.isOnTop = scrollTop <= 50;
     },
     // 退出登录
-    logout(){
+    logout() {
       //TODO
-      this.$m.vuex('vuexIsLogin',false);
+      this.$m.vuex('vuexIsLogin', false);
     },
     // item被点击
-    navItemOnClick(index: number){
+    navItemOnClick(index: number) {
       // 计算指示器width
       const widthIndicator = (this.navItemsWidth[index] - 20);
       let leftIndicator = 0;
       leftIndicator += (this.navItemsWidth[index] - widthIndicator) / 2;
-      for (let i = 0 ; i < index; i++){
+      for (let i = 0; i < index; i++) {
         leftIndicator += this.navItemsWidth[index];
       }
       this.indicator.width = widthIndicator;
@@ -227,7 +233,7 @@ export default defineComponent({
     // this.$m.vuex('vuexIsLogin', true);
 
     // 计算 header nav item 宽度
-    (this as any).$refs.navs.childNodes.forEach((nav: Element)=>{
+    (this as any).$refs.navs.childNodes.forEach((nav: Element) => {
       this.navItemsWidth.push(nav.clientWidth)
     })
     // 默认指向首页
@@ -293,7 +299,7 @@ export default defineComponent({
 
 // 用户容器
 .user-group {
-  .message-container{
+  .message-container {
     margin-right: 25px;
   }
 }
@@ -312,7 +318,8 @@ export default defineComponent({
 .nav-group {
   position: relative;
   font-size: 17px;
-  .nav-bottom-indicator{
+
+  .nav-bottom-indicator {
     position: absolute;
     left: 0;
     width: 0;
@@ -320,8 +327,8 @@ export default defineComponent({
     height: 2px;
     background-color: #777;
     border-radius: 2px;
-    transition: left .3s ease,width .3s ease,background-color .3s ease;
-    -webkit-transition: left .3s ease,width .3s ease,background-color .3s ease;
+    transition: left .3s ease, width .3s ease, background-color .3s ease;
+    -webkit-transition: left .3s ease, width .3s ease, background-color .3s ease;
   }
 }
 </style>
@@ -340,34 +347,39 @@ export default defineComponent({
     border: 1px solid $maxer-dropdown-border-normal-color;
     color: $maxer-dropdown-text-normal-color;
   }
+
   // 消息信息面板
-  .message-warp{
+  .message-warp {
     position: relative;
     padding: 10px 0;
   }
 
 
   // 用户信息面板
-  .info-wrap{
+  .info-wrap {
     position: relative;
     padding-top: 20px;
-    .info-avatar{
+
+    .info-avatar {
       position: absolute;
       top: -48px;
       width: 64px;
       height: 64px;
     }
+
     // 用户名，头衔？
-    .header-user-info{
-      .header-user-name{
+    .header-user-info {
+      .header-user-name {
         font-size: 18px;
         font-weight: 600;
         color: $maxer-userName-default-color;
-        &.super{
+
+        &.super {
           color: $maxer-userName-super-color;
         }
       }
-      .super-user-icon{
+
+      .super-user-icon {
         color: #fff;
         padding: 3px 5px;
         border-radius: 3px;
@@ -376,16 +388,20 @@ export default defineComponent({
         background: $maxer-userName-super-color;
       }
     }
+
     // 用户面板中间信息
-    .mid-user-info{
-      .coin-auth{
+    .mid-user-info {
+      .coin-auth {
         padding: 5px 10px;
-        .coin-container{
+
+        .coin-container {
           cursor: pointer;
-          a{
+
+          a {
             transition: color .3s ease-out;
             -webkit-transition: color .3s ease-out;
-            &:hover{
+
+            &:hover {
               color: $maxer-a-hover-color;
               transition: color .3s ease-out;
               -webkit-transition: color .3s ease-out;
@@ -394,17 +410,20 @@ export default defineComponent({
 
         }
       }
-      .authentication-container{
-        .auth-mail{
+
+      .authentication-container {
+        .auth-mail {
           cursor: pointer;
         }
-        .auth-phone{
+
+        .auth-phone {
           cursor: pointer;
         }
       }
     }
+
     // 用户面板底部快捷菜单
-    .bottom-navs{
+    .bottom-navs {
       margin-top: 10px;
     }
   }
