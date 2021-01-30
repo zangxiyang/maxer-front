@@ -25,8 +25,9 @@ jobs:
         uses: actions/checkout@master
       - run: npm install
       - run: npm run build
-      - run: cd dist
-      - run: tar -zcvf release.tgz *
+      - run: |
+          cd dist
+          tar -zcvf release.tgz *
         
       # 第三步：发布 Release
       - name: Create Release # 创建Release，可以在仓库看到一个个版本
