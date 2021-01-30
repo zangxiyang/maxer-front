@@ -20,7 +20,7 @@
                         @click="navItemOnClick"/>
               <nav-item icon="iconicon9"
                         :nav-index="1"
-                        route="/"
+                        route="/article"
                         text="文章"
                         @click="navItemOnClick"/>
               <nav-item icon="iconzuopin"
@@ -325,7 +325,8 @@ export default defineComponent({
     width: 0;
     bottom: 0;
     height: 2px;
-    background-color: #777;
+    background-color: $maxer-nav-item-active-color;
+    opacity: .7;
     border-radius: 2px;
     transition: left .3s ease, width .3s ease, background-color .3s ease;
     -webkit-transition: left .3s ease, width .3s ease, background-color .3s ease;

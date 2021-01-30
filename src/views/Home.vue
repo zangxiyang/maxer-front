@@ -1,23 +1,5 @@
 <template>
-  <header id="maxer-home-header" style="background: rgb(64,78,90)">
-    <div class="header-bg-mask-container">
-      <div class="bg-mask animate__animated animate__fadeIn animate__slow"
-           v-for="item in carousel.items" :key="item.id"
-           :style="[{backgroundImage:`url(${item.image})`}
-           ,{display: carousel.index === item.id? 'block':'none'}]"></div>
-    </div>
-    <div class="header-bg-mask-container over">
-
-    </div>
-
-    <div class="maxer-container">
-      <div class="carousel-wrap">
-        <maxer-carousel
-            v-model:carousel-index="carousel.index"
-            :items="carousel.items"/>
-      </div>
-    </div>
-  </header>
+  <Header is-carousel :carousel="carousel.items" />
   <main id="maxer-home-main">
     <!-- 内容区域 -->
     <div class="maxer-container f-jc-sb">
@@ -35,18 +17,16 @@
       </div>
     </div>
   </main>
-  <!-- 页脚 -->
-  <Footer/>
 </template>
 
 <script lang="ts">
 import {defineComponent} from 'vue';
-import MaxerCarousel, {CarouselItems} from "@/components/MaxerCarousel.vue";
+import {CarouselItems} from "@/components/MaxerCarousel.vue";
 import PostList from "@/components/PostList.vue";
 import AsideAds from "@/components/asideAds.vue";
 import AsideDaySentence from "@/components/asideDaySentence.vue";
 import AsideComments from "@/components/asideComments.vue";
-import Footer from "@/components/Footer.vue"; // @ is an alias to /src
+import Header from "@/components/Header.vue"; // @ is an alias to /src
 
 
 export default defineComponent({
@@ -78,60 +58,15 @@ export default defineComponent({
     }
   },
   components: {
-    Footer,
+    Header,
     AsideComments,
     AsideDaySentence,
     AsideAds,
     PostList,
-    MaxerCarousel
   }
 })
 </script>
 <style lang="scss" scoped>
-$maxer-home-header-height: 480px +  20px;
-// header 样式
-#maxer-home-header {
-  box-sizing: border-box;
-  position: relative;
-  height: $maxer-home-header-height;
-  width: 100%;
-  overflow: hidden;
-
-  .header-bg-mask-container {
-    height: $maxer-home-header-height;
-    width: 100%;
-    position: absolute;
-    z-index: 1;
-    background-color: #eeeeee;
-
-    $header-mask-dark: linear-gradient(0deg, #09203f 0, #537895);
-    $header-mask-light: linear-gradient(135deg, #fdfcfb, #e2d1c3);
-
-    &.over {
-      background-image: $header-mask-light;
-      opacity: .7;
-      z-index: 1;
-    }
-
-    .bg-mask {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background-size: cover;
-      background-position: center top 5%;
-      z-index: 0;
-      filter: blur(50px);
-      background-repeat: no-repeat;
-      transition: .8s ease-in-out;
-    }
-  }
-
-  .carousel-wrap {
-
-    padding-top: 100px;
-    z-index: 5;
-  }
-}
 
 // main 样式
 #maxer-home-main {

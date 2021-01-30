@@ -64,7 +64,7 @@ export default defineComponent({
     return{
       now: 0,
       lifeTime: '' as string|null,
-      startTime: '2018/08/02'
+      startTime: '2018/08/19'
     }
   },
   watch:{
