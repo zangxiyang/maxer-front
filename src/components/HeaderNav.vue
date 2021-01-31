@@ -268,7 +268,7 @@ export default defineComponent({
   -webkit-transition: padding-top .3s ease-out, background-color .3s ease-out;
 
   &.on-top {
-    //color: $maxer-nav-item-normal-color;
+    color: $maxer-nav-item-normal-color;
     padding-top: 5px;
     background: rgba(0, 0, 0, 0);
     backdrop-filter: saturate(100%) blur(0);
@@ -307,11 +307,14 @@ export default defineComponent({
 // 当没有移出可滑动区域时
 .on-top {
   .logo {
-    //color: $maxer-nav-item-normal-color;
+    color: $maxer-nav-item-normal-color;
 
     a {
-      //color: $maxer-nav-item-normal-color;
+      color: $maxer-nav-item-normal-color;
     }
+  }
+  .nav-bottom-indicator{
+    background-color: $maxer-nav-item-normal-color !important;
   }
 }
 

@@ -51,6 +51,17 @@ export default defineComponent({
 <style lang="scss" scoped>
 @import "src/assets/scss/maxer.variables";
 
+.on-top .nav-item a{
+  &.active{
+    color: $maxer-nav-item-normal-color;
+  }
+  &:hover{
+    color: $maxer-nav-item-normal-color;
+    transition: color .3s ease-out;
+    -webkit-transition: color .3s ease-out;
+  }
+
+}
 .nav-item {
   position: relative;
   // 引入的iconfont图标需要外间距
@@ -68,10 +79,10 @@ export default defineComponent({
     -webkit-transition: all .3s ease-out;
     // 暂不需要
     &.active{
-      color: $maxer-nav-item-active-color !important;
+      color: $maxer-nav-item-active-color ;
     }
     &:hover {
-      color: $maxer-nav-item-active-color !important;
+      color: $maxer-nav-item-active-color;
       transition: color .3s ease-out;
       -webkit-transition: color .3s ease-out;
     }
@@ -114,7 +125,7 @@ export default defineComponent({
 .on-top{
   .nav-item{
     a{
-      //color: $maxer-nav-item-normal-color;
+      color: $maxer-nav-item-normal-color;
       transition: all .3s ease-out;
       -webkit-transition: all .3s ease-out;
     }

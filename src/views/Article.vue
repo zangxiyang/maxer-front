@@ -1,7 +1,8 @@
 <template>
 <Header title="文章" desc="描述信息" background="https://velas-1252562537.file.myqcloud.com/images/jakob-owens.jpg!header_thumbnail"/>
 
-  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+
   文章页面
 </template>
 
@@ -13,7 +14,7 @@
  * 版本: V1
 */
 import {defineComponent} from 'vue';
-import Header from "@/components/Header.vue";
+import Header from "@/components/MaxerHeader.vue";
 
 export default defineComponent({
   name: "Article",
@@ -21,6 +22,6 @@ export default defineComponent({
 })
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 
 </style>

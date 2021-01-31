@@ -1,5 +1,5 @@
 <template>
-  <Header is-carousel :carousel="carousel.items" />
+  <maxer-header/>
   <main id="maxer-home-main">
     <!-- 内容区域 -->
     <div class="maxer-container f-jc-sb">
@@ -26,7 +26,7 @@ import PostList from "@/components/PostList.vue";
 import AsideAds from "@/components/asideAds.vue";
 import AsideDaySentence from "@/components/asideDaySentence.vue";
 import AsideComments from "@/components/asideComments.vue";
-import Header from "@/components/Header.vue"; // @ is an alias to /src
+import MaxerHeader from "@/components/MaxerHeader.vue"; // @ is an alias to /src
 
 
 export default defineComponent({
@@ -58,7 +58,7 @@ export default defineComponent({
     }
   },
   components: {
-    Header,
+    MaxerHeader,
     AsideComments,
     AsideDaySentence,
     AsideAds,
