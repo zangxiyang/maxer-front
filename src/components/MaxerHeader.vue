@@ -1,5 +1,5 @@
 <template>
-  <header id="maxer-header" class="animate__animated animate__fadeIn animate__slower">
+  <header id="maxer-header">
     <div class="header-content">
       <div class="maxer-container" style="height: 100%">
         <div class="f-jc-c f-col" style="height: 100%">

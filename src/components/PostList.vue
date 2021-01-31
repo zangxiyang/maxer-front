@@ -3,7 +3,7 @@
     <icon-font name="iconshuqian" left="10px" right="8px" size="30px"/>
     <span>精选</span>
   </div>
-  <div class="maxer-post-lists f-jc-sb f-wrap">
+  <div class="maxer-post-lists flex f-wrap">
     <post-item/>
     <post-item/>
     <post-item/>
@@ -62,6 +62,7 @@ export default defineComponent({
   position: relative;
   transition: all .3s ease-out;
   -webkit-transition: all .3s ease-out;
+  align-content: space-between;
 }
 
 .maxer-post-loadMore {

@@ -6,15 +6,16 @@
       <div class="main-container">
         <post-list></post-list>
       </div>
-      <div class="aside-container">
-        <!-- 侧边栏 -->
-        <!-- 每日一言 -->
+      <!--启用侧边栏-->
+      <!--<div class="aside-container">
+        &lt;!&ndash; 侧边栏 &ndash;&gt;
+        &lt;!&ndash; 每日一言 &ndash;&gt;
         <aside-day-sentence/>
-        <!-- 最新评论 -->
+        &lt;!&ndash; 最新评论 &ndash;&gt;
         <aside-comments/>
-        <!-- 金主 -->
+        &lt;!&ndash; 金主 &ndash;&gt;
         <aside-ads/>
-      </div>
+      </div>-->
     </div>
   </main>
 </template>
@@ -23,9 +24,7 @@
 import {defineComponent} from 'vue';
 import {CarouselItems} from "@/components/MaxerCarousel.vue";
 import PostList from "@/components/PostList.vue";
-import AsideAds from "@/components/asideAds.vue";
-import AsideDaySentence from "@/components/asideDaySentence.vue";
-import AsideComments from "@/components/asideComments.vue";
+
 import MaxerHeader from "@/components/MaxerHeader.vue"; // @ is an alias to /src
 
 
@@ -59,9 +58,9 @@ export default defineComponent({
   },
   components: {
     MaxerHeader,
-    AsideComments,
+    /*AsideComments,
     AsideDaySentence,
-    AsideAds,
+    AsideAds,*/
     PostList,
   }
 })
