@@ -51,6 +51,19 @@ jobs:
           asset_path: ./dist/release.tgz # 要上传文件
           asset_name: release.tgz # 上传后的文件名
           asset_content_type: application/x-tgz
+      - name: Delete before Version
+        uses: appleboy/ssh-action@master # 使用ssh链接服务器
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          script: |
+            cd /www/wwwroot/maxer.imsle.com
+            echo '清空当前版本'
+            rm -rf *
+            echo '清空成功'
+            echo '开始替换最新版本'
       - name: Deploy for Private
         uses: easingthemes/ssh-deploy@v2.1.5
         with:
