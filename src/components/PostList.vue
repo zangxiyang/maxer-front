@@ -1,9 +1,5 @@
 <template>
-  <div class="maxer-post-lists-title flex al-c">
-    <icon-font name="iconshuqian" left="10px" right="8px" size="30px"/>
-    <span>精选</span>
-  </div>
-  <div class="maxer-post-lists flex f-wrap">
+  <div class="maxer-post-lists flex f-wrap animate__animated animate__fadeIn">
     <post-item/>
     <post-item/>
     <post-item/>
@@ -11,6 +7,7 @@
     <post-item/>
     <post-item/>
     <template v-if="loading">
+      <post-item is-skeleton/>
       <post-item is-skeleton/>
       <post-item is-skeleton/>
     </template>
@@ -47,16 +44,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.maxer-post-lists-title {
-  font-size: 20px;
-  font-weight: 600;
-  color: #8e8787;
-  padding: 10px 0 20px 0;
-  border-bottom: 1px solid #eaeaea;
-  user-select: none;
-  -webkit-user-select: none;
-}
-
 .maxer-post-lists {
   padding-top: 10px;
   position: relative;

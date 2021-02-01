@@ -42,14 +42,24 @@
             </template>
           </el-skeleton>
         </template>
-        <div class="item-container">{{ item.title }}</div>
+        <div class="item-container">
+
+          <div class="content f-jc-c f-col al-c">
+            <h4 class="title" :title="item.title">
+              {{ item.title }}
+            </h4>
+            <button class="maxer-border-button light mt-10">
+              点击前往
+            </button>
+          </div>
+        </div>
       </swiper-slide>
       <!-- add navigation -->
       <div class="maxer-carousel-button-next f-jc-c al-c">
-        <icon-font name="iconi-right" size="70px"/>
+        <icon-font name="iconRight-" size="25px"/>
       </div>
       <div class="maxer-carousel-button-prev f-jc-c al-c">
-        <icon-font name="iconi-left" size="70px"/>
+        <icon-font name="iconLeft-" size="25px"/>
       </div>
       <!-- add pagination -->
       <div class="swiper-pagination"></div>
@@ -149,14 +159,14 @@ export default defineComponent({
 .maxer-carousel {
   position: relative;
   box-sizing: border-box;
-  height: 380px;
+  height: 280px;
   background-color: transparent;
   border-radius: 10px;
   overflow: hidden;
 
   .maxer-carousel-item {
     position: relative;
-    height: 380px;
+    height: 280px;
     background-color: #eeeeee;
 
     .item-back {
@@ -172,8 +182,23 @@ export default defineComponent({
       position: absolute;
       width: 100%;
       height: 100%;
-
+      color: #fff;
+      background-color: rgba(0,0,0,.3);
       z-index: 1;
+      .content{
+        width: 100%;
+        height: 100%;
+        .title{
+          font-weight: 600;
+          font-size: 1.5rem;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          text-align: center;
+          width: 60%;
+          cursor: default;
+        }
+      }
     }
   }
 

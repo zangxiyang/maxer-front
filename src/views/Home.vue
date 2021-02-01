@@ -2,9 +2,21 @@
   <maxer-header/>
   <main id="maxer-home-main">
     <!-- 内容区域 -->
-    <div class="maxer-container f-jc-sb">
-      <div class="main-container">
-        <post-list></post-list>
+    <div class="maxer-container">
+      <maxer-carousel :items="carousel.items" :carousel-index="carousel"/>
+
+
+      <div class="main-container mt-10">
+        <maxer-tab :tabs="['文章','微聊']" v-model:index="tab.index" @click="homeTabOnClick">
+          <template v-slot:0>
+            <post-list/>
+          </template>
+          <template v-slot:1>
+            <div class="animate__animated animate__fadeIn" style="min-height: 200px">
+              功能正在Coding中
+            </div>
+          </template>
+        </maxer-tab>
       </div>
       <!--启用侧边栏-->
       <!--<div class="aside-container">
@@ -22,10 +34,11 @@
 
 <script lang="ts">
 import {defineComponent} from 'vue';
-import {CarouselItems} from "@/components/MaxerCarousel.vue";
+import MaxerCarousel, {CarouselItems} from "@/components/MaxerCarousel.vue";
 import PostList from "@/components/PostList.vue";
 
-import MaxerHeader from "@/components/MaxerHeader.vue"; // @ is an alias to /src
+import MaxerHeader from "@/components/MaxerHeader.vue";
+import MaxerTab from "@/components/MaxerTab.vue"; // @ is an alias to /src
 
 
 export default defineComponent({
@@ -38,7 +51,7 @@ export default defineComponent({
         items: [
           {
             id: 0,
-            title: '群星闪耀，终不过一曲清欢',
+            title: '群星闪耀，终不过一曲清欢，长度测试长度测试长度测试长度测试长度测试',
             image: 'https://talk-1252562537.file.myqcloud.com/images/post/2020-10-11-root-film-slide.png!slide_thumbnail'
           },
           {
@@ -52,16 +65,26 @@ export default defineComponent({
             image: 'https://talk-1252562537.file.myqcloud.com/images/post/2019-07-24-74746222_p0-1.jpg!slide_thumbnail'
           }
         ] as Array<CarouselItems>
+      },
+      tab:{
+        index: 0
       }
 
     }
   },
   components: {
+    MaxerTab,
+    MaxerCarousel,
     MaxerHeader,
     /*AsideComments,
     AsideDaySentence,
     AsideAds,*/
     PostList,
+  },
+  methods:{
+    homeTabOnClick(index: number){
+      console.log(index + "被点击了")
+    }
   }
 })
 </script>
@@ -75,11 +98,35 @@ export default defineComponent({
   .main-container {
     min-width: 700px;
     flex: 1;
-    margin-right: 24px;
     padding: 24px;
     border-radius: 10px;
     //background-color: #ececec;
     background-color: #f9f9f9;
+  }
+
+  // tab
+  .tab-container{
+    .tab-item{
+      position: relative;
+      color: #585858;
+      font-size: 15px;
+      cursor: pointer;
+      user-select: none;
+      -webkit-user-select: none;
+      &.active{
+        font-size: 20px;
+        color: #202020;
+        font-weight: 600;
+        transition: .3s ease-out;
+      }
+      &:not(:last-child):after{
+        content: '/';
+        margin-right: 5px;
+        font-size: 15px;
+        color: #111111;
+        cursor: default;
+      }
+    }
   }
 
   // 侧边栏
