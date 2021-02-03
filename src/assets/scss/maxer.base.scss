@@ -89,6 +89,7 @@
 .maxer-border-button{
   @extend .f-jc-c;
   @extend .al-c;
+  display: inline-flex !important;
   font-size: 13px;
   padding: 3px 8px;
   user-select: none;

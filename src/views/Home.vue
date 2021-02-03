@@ -33,7 +33,7 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from 'vue';
+import {defineComponent, computed, ref, provide, reactive} from 'vue';
 import MaxerCarousel, {CarouselItems} from "@/components/MaxerCarousel.vue";
 import PostList from "@/components/PostList.vue";
 
@@ -41,9 +41,20 @@ import MaxerHeader from "@/layout/MaxerHeader.vue";
 import MaxerTab from "@/components/MaxerTab.vue";
 import WeChat from "@/components/WeChat/WeChat.vue"; // @ is an alias to /src
 
-
+interface Wechat{
+  isLoading: boolean;
+}
 export default defineComponent({
   name: 'Home',
+  setup(){
+
+    // 微聊
+    const wechat = reactive({
+      isLoading: true
+    } as Wechat)
+    provide("wechat",wechat)
+    return {wechat}
+  },
   data() {
     return {
       flag: '这是一个标识',
@@ -67,9 +78,9 @@ export default defineComponent({
           }
         ] as Array<CarouselItems>
       },
-      tab:{
+      tab: {
         index: 0
-      }
+      },
 
     }
   },
@@ -83,10 +94,24 @@ export default defineComponent({
     AsideAds,*/
     PostList,
   },
-  methods:{
-    homeTabOnClick(index: number){
+  methods: {
+    homeTabOnClick(index: number) {
       console.log(index + "被点击了")
+      switch (index){
+        case 0:
+          // 首页文章tab
+              break;
+        case 1:
+          // 首页微聊tab
+            // 模拟加载
+            this.wechat.isLoading = true
+            setTimeout(()=>this.wechat.isLoading = false,3000)
+              break;
+      }
     }
+  },
+  mounted() {
+    setTimeout(()=> this.wechat.isLoading = false,5000)
   }
 })
 </script>
@@ -107,21 +132,23 @@ export default defineComponent({
   }
 
   // tab
-  .tab-container{
-    .tab-item{
+  .tab-container {
+    .tab-item {
       position: relative;
       color: #585858;
       font-size: 15px;
       cursor: pointer;
       user-select: none;
       -webkit-user-select: none;
-      &.active{
+
+      &.active {
         font-size: 20px;
         color: #202020;
         font-weight: 600;
         transition: .3s ease-out;
       }
-      &:not(:last-child):after{
+
+      &:not(:last-child):after {
         content: '/';
         margin-right: 5px;
         font-size: 15px;

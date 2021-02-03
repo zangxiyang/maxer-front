@@ -1,5 +1,5 @@
 <template>
-  <el-skeleton animated :loading="isLoading">
+  <el-skeleton animated :loading="wechat.isLoading">
     <template v-slot:template>
       <div class="we-chat-item-container flex" loading @mouseenter="onHover" @mouseleave="onDisHover">
         <div class="avatar">
@@ -87,9 +87,7 @@ export default defineComponent({
       this.isHover = false;
     }
   },
-  mounted() {
-    setTimeout(() => this.isLoading = false, 4000);
-  }
+  inject:['wechat'],
 })
 </script>
 
