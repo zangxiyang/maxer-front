@@ -38,7 +38,7 @@
         <template v-if="!loadedFlags[item.id]">
           <el-skeleton animated style="position: absolute;z-index: 9999">
             <template v-slot:template>
-              <el-skeleton-item variant="image" style="width: 100%; height: 380px;"/>
+              <el-skeleton-item variant="image" style="width: 100%; height: 280px;"/>
             </template>
           </el-skeleton>
         </template>

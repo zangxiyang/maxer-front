@@ -3,7 +3,7 @@
   <main id="maxer-home-main">
     <!-- 内容区域 -->
     <div class="maxer-container">
-      <maxer-carousel :items="carousel.items" :carousel-index="carousel"/>
+      <maxer-carousel :items="carousel.items" v-model:carousel-index="carousel.index"/>
 
 
       <div class="main-container mt-10">
@@ -13,7 +13,7 @@
           </template>
           <template v-slot:1>
             <div class="animate__animated animate__fadeIn" style="min-height: 200px">
-              功能正在Coding中
+              <we-chat/>
             </div>
           </template>
         </maxer-tab>
@@ -38,7 +38,8 @@ import MaxerCarousel, {CarouselItems} from "@/components/MaxerCarousel.vue";
 import PostList from "@/components/PostList.vue";
 
 import MaxerHeader from "@/layout/MaxerHeader.vue";
-import MaxerTab from "@/components/MaxerTab.vue"; // @ is an alias to /src
+import MaxerTab from "@/components/MaxerTab.vue";
+import WeChat from "@/components/WeChat/WeChat.vue"; // @ is an alias to /src
 
 
 export default defineComponent({
@@ -73,6 +74,7 @@ export default defineComponent({
     }
   },
   components: {
+    WeChat,
     MaxerTab,
     MaxerCarousel,
     MaxerHeader,

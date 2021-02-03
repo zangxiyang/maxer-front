@@ -6,8 +6,8 @@
           <div class="f-jc-c al-c">
             <span id="typed" class="typed-text"></span>
           </div>
-          <div class="mt-10 f-jc-c al-c">
-            <span id="hitokotoo" class="typed-text"></span>
+          <div class="mt-15 f-jc-c al-c">
+            <span id="hitokoto" class="typed-text hitokoto"></span>
           </div>
         </div>
       </div>
@@ -57,7 +57,7 @@ export default defineComponent({
     request('/proxy/hitokoto', Methods.GET).then(({data}) => {
       this.hitokoto = (data as any).data
       this.hitokotos.push(`${this.hitokoto.hitokoto} ^1000    「${this.hitokoto.from}」`)
-      new Typed('#hitokotoo', {
+      new Typed('#hitokoto', {
         strings: this.hitokotos,
         typeSpeed: 50,
         showCursor: false
@@ -101,11 +101,15 @@ export default defineComponent({
 
     .typed-text {
       font-family: -apple-system, serif, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Serif SC", "PingFang SC", "Microsoft Yahei UI", "Microsoft Yahei", serif;
-      min-height: 34px;
+      height: 38px;
       font-weight: 600;
       color: #eeeeee;
-      font-size: 25px;
+      font-size: 30px;
       text-shadow: 0 0 .3125rem #1c1f21;
+
+      &.hitokoto{
+        font-size: 24px;
+      }
     }
   }
 

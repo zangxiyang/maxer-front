@@ -59,6 +59,9 @@
 .mr-10{
   margin-right: 10px;
 }
+.mt-15{
+  margin-top: 15px;
+}
 .mt-10{
   margin-top: 10px;
 }
@@ -73,6 +76,13 @@
 }
 .cur-p{
   cursor: pointer;
+}
+
+.none-select{
+  user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -webkit-user-select: none;
 }
 
 /*maxer self scss*/
