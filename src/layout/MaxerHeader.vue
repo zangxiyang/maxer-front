@@ -9,6 +9,9 @@
           <div class="mt-15 f-jc-c al-c">
             <span id="hitokoto" class="typed-text hitokoto"></span>
           </div>
+          <div class="mt-5 f-jc-r al-c">
+            <span id="hitokoto-from" class="typed-text hitokoto flex al-c"></span>
+          </div>
         </div>
       </div>
     </div>
@@ -56,12 +59,20 @@ export default defineComponent({
     })
     request('/proxy/hitokoto', Methods.GET).then(({data}) => {
       this.hitokoto = (data as any).data
-      this.hitokotos.push(`${this.hitokoto.hitokoto} ^1000    「${this.hitokoto.from}」`)
+      this.hitokotos.push(`${this.hitokoto.hitokoto} ^1000`)
       new Typed('#hitokoto', {
         strings: this.hitokotos,
         typeSpeed: 50,
-        showCursor: false
+        showCursor: false,
+        onComplete: () => {
+          new Typed('#hitokoto-from', {
+            strings: [`<div style="height: 2px;width: 30px;background: #fff;"></div>${this.hitokoto.from_who ? this.hitokoto.from_who + '^500':''} 「${this.hitokoto.from}」`],
+            typeSpeed: 50,
+            showCursor: false
+          })
+        },
       })
+
     })
   }
 })
