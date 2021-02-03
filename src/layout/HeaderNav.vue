@@ -249,7 +249,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import "src/assets/scss/maxer.variables";
+@import "../assets/scss/maxer.variables";
 
 .navbar {
   color: $maxer-nav-dropdown-item-normal-color;
@@ -338,7 +338,7 @@ export default defineComponent({
 </style>
 
 <style lang="scss">
-@import "src/assets/scss/maxer.variables";
+@import "../assets/scss/maxer.variables";
 // 用户面板
 .user-info-container {
 

@@ -15,8 +15,8 @@
 
 <script lang="ts">
 import {defineComponent} from 'vue'
-import HeaderNav from "@/components/HeaderNav.vue";
-import Footer from "@/components/Footer.vue";
+import HeaderNav from "@/layout/HeaderNav.vue";
+import Footer from "@/layout/Footer.vue";
 
 export default defineComponent({
   name: 'App',

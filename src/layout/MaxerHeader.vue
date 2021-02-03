@@ -23,19 +23,26 @@
 <script lang="ts">
 import {defineComponent} from 'vue';
 import Typed from "typed.js";
+import {Methods, request} from "@/utils/request";
+
+interface Hitokoto {
+  hitokoto: string;
+  from: string;
+  from_who: string;
+}
 
 export default defineComponent({
   name: "MaxerHeader",
   components: {},
-  props: {
-  },
+  props: {},
   data() {
     return {
       typedStrings: [
         '群星闪耀，^1000 终不过一曲清欢',
         '群星闪耀，^1000 我是一个Coder'
       ],
-      hitokotos: ['这里是一言的内容 ——Hitokotoo']
+      hitokotos: [] as Array<string>,
+      hitokoto: {} as Hitokoto
     }
   },
   mounted() {
@@ -47,10 +54,14 @@ export default defineComponent({
       loop: true,
       startDelay: 500
     })
-    new Typed('#hitokotoo', {
-      strings: this.hitokotos,
-      typeSpeed: 50,
-      showCursor: false
+    request('/proxy/hitokoto', Methods.GET).then(({data}) => {
+      this.hitokoto = (data as any).data
+      this.hitokotos.push(`${this.hitokoto.hitokoto} ^1000    「${this.hitokoto.from}」`)
+      new Typed('#hitokotoo', {
+        strings: this.hitokotos,
+        typeSpeed: 50,
+        showCursor: false
+      })
     })
   }
 })
@@ -69,6 +80,7 @@ export default defineComponent({
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
+
   &:before {
     content: '';
     position: absolute;
@@ -89,7 +101,7 @@ export default defineComponent({
 
     .typed-text {
       font-family: -apple-system, serif, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Serif SC", "PingFang SC", "Microsoft Yahei UI", "Microsoft Yahei", serif;
-      min-height: 20px;
+      min-height: 34px;
       font-weight: 600;
       color: #eeeeee;
       font-size: 25px;

@@ -37,7 +37,7 @@ import {defineComponent} from 'vue';
 import MaxerCarousel, {CarouselItems} from "@/components/MaxerCarousel.vue";
 import PostList from "@/components/PostList.vue";
 
-import MaxerHeader from "@/components/MaxerHeader.vue";
+import MaxerHeader from "@/layout/MaxerHeader.vue";
 import MaxerTab from "@/components/MaxerTab.vue"; // @ is an alias to /src
 
 

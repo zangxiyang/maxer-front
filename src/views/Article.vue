@@ -14,7 +14,7 @@
  * 版本: V1
 */
 import {defineComponent} from 'vue';
-import Header from "@/components/MaxerHeader.vue";
+import Header from "@/layout/MaxerHeader.vue";
 
 export default defineComponent({
   name: "Article",

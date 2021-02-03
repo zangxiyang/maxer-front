@@ -1,5 +1,5 @@
 <template>
-  <el-row class="maxer-post-item-container" >
+  <el-row class="maxer-post-item-container f-jc-c" >
     <div class="maxer-post-item flex f-col" :loading="postInfoLoading">
       <div class="post-cover">
         <el-skeleton animated :loading="coverLoading || isSkeleton">

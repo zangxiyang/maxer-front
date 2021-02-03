@@ -27,8 +27,7 @@ axios.defaults.timeout = 5000;
 axios.defaults.withCredentials = true;
 axios.defaults.xsrfHeaderName = xsrfHeaderName;
 axios.defaults.xsrfCookieName = xsrfHeaderName;
-
-
+axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 
 // axios 拦截器
 

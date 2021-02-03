@@ -17,7 +17,7 @@
 
 <script lang="ts">
 import {defineComponent} from 'vue'
-import MaxerHeader from "@/components/MaxerHeader.vue";
+import MaxerHeader from "@/layout/MaxerHeader.vue";
 
 
 export default defineComponent({
