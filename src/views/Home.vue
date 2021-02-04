@@ -1,5 +1,4 @@
 <template>
-  <maxer-header/>
   <main id="maxer-home-main">
     <!-- 内容区域 -->
     <div class="maxer-container">
@@ -88,7 +87,6 @@ export default defineComponent({
     WeChat,
     MaxerTab,
     MaxerCarousel,
-    MaxerHeader,
     /*AsideComments,
     AsideDaySentence,
     AsideAds,*/

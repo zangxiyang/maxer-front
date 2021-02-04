@@ -1,5 +1,4 @@
 <template>
-<Header title="文章" desc="描述信息" background="https://velas-1252562537.file.myqcloud.com/images/jakob-owens.jpg!header_thumbnail"/>
 
 
 
@@ -14,11 +13,10 @@
  * 版本: V1
 */
 import {defineComponent} from 'vue';
-import Header from "@/layout/MaxerHeader.vue";
+
 
 export default defineComponent({
   name: "Article",
-  components: {Header},
 })
 </script>
 

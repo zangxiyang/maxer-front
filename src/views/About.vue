@@ -1,5 +1,4 @@
 <template>
-  <maxer-header/>
   <div class="about">
 
 
@@ -17,12 +16,10 @@
 
 <script lang="ts">
 import {defineComponent} from 'vue'
-import MaxerHeader from "@/layout/MaxerHeader.vue";
 
 
 export default defineComponent({
   name: 'About',
-  components: {MaxerHeader},
   data() {
     return {
 

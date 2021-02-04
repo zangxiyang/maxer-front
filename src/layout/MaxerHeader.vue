@@ -7,10 +7,7 @@
             <span id="typed" class="typed-text"></span>
           </div>
           <div class="mt-15 f-jc-c al-c">
-            <span id="hitokoto" class="typed-text hitokoto"></span>
-          </div>
-          <div class="mt-5 f-jc-r al-c">
-            <span id="hitokoto-from" class="typed-text hitokoto flex al-c"></span>
+            <div id="hitokoto" class="typed-text hitokoto"></div>
           </div>
         </div>
       </div>
@@ -61,16 +58,9 @@ export default defineComponent({
       this.hitokoto = (data as any).data
       this.hitokotos.push(`${this.hitokoto.hitokoto} ^1000`)
       new Typed('#hitokoto', {
-        strings: this.hitokotos,
+        strings: [`<div>${this.hitokoto.hitokoto}</div><div class="f-jc-r al-c mt-15"><div style="height: 2px;width: 30px;background: #fff;"></div><span>${this.hitokoto.from_who ? this.hitokoto.from_who + '^500':''} 「${this.hitokoto.from}」</span></div>`],
         typeSpeed: 50,
         showCursor: false,
-        onComplete: () => {
-          new Typed('#hitokoto-from', {
-            strings: [`<div style="height: 2px;width: 30px;background: #fff;"></div>${this.hitokoto.from_who ? this.hitokoto.from_who + '^500':''} 「${this.hitokoto.from}」`],
-            typeSpeed: 50,
-            showCursor: false
-          })
-        },
       })
 
     })
