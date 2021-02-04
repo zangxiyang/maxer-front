@@ -1,7 +1,6 @@
 <template>
   <maxer-header/>
   <router-view v-slot="{ Component, route}">
-    <span>{{route.meta}}</span>
     <keep-alive>
       <component :is="Component" v-if="route.meta.keepAlive"/>
     </keep-alive>
