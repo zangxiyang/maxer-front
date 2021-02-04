@@ -8,9 +8,7 @@
         {{ tab }}
       </div>
     </div>
-    <div class="title-line-wrap">
-      <div class="title-line"></div>
-    </div>
+    <title-line/>
   </div>
   <div class="maxer-tab-content-container">
     <div class="tab-item" v-for="(tab,i) in tabs" :key="i" :index="i" v-show="index === i">
@@ -21,9 +19,11 @@
 
 <script lang="ts">
 import {defineComponent, PropType} from 'vue';
+import TitleLine from "@/components/TitleLine.vue";
 
 export default defineComponent({
   name: "MaxerTab",
+  components: {TitleLine},
   props: {
     tabs: Array as PropType<Array<string>>,
     index: {
@@ -49,23 +49,6 @@ export default defineComponent({
 // tab 标题容器
 .maxer-tab-container {
   position: relative;
-
-  // title line
-  .title-line-wrap{
-    box-sizing: border-box;
-    width: 312px;
-    margin: 0 auto;
-    height: 2px;
-    overflow: hidden;
-    .title-line{
-      box-sizing: inherit;
-      width: 64px;
-      height: 100%;
-      background: linear-gradient(90deg,rgba(24,144,255,0) 0, #9c6328);
-      transform: translateX(-64px);
-      animation: titleLine 3s ease-in-out 1.5s infinite;
-    }
-  }
 
   .tab-item {
     position: relative;
@@ -98,13 +81,4 @@ export default defineComponent({
   }
 }
 
-@keyframes titleLine {
-  0%,25% {
-    transform: translateX(-64px)
-  }
-
-  75%,to {
-    transform: translateX(376px)
-  }
-}
 </style>

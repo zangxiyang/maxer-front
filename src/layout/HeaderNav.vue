@@ -1,5 +1,5 @@
 <template>
-  <div id="header-nav" class="navbar" :class="{'on-top':isOnTop}">
+  <div id="header-nav" class="navbar" :class="[{'on-top':isOnTop},{'safari':isSafari}]">
     <nav class="nav-container">
       <div class="navigation maxer-container f-jc-sb al-c">
         <div class="logo-nav-group flex al-c">
@@ -165,7 +165,7 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from 'vue'
+import {defineComponent, ref} from 'vue'
 import NavItem from "@/components/navItem.vue";
 import MxButton from "@/components/MxButton.vue";
 import IconFont from "@/components/IconFont.vue";
@@ -174,6 +174,11 @@ import PopNavItem from "@/components/popNavItem.vue";
 export default defineComponent({
   name: 'HeaderNav',
   components: {PopNavItem, IconFont, MxButton, NavItem},
+  setup(){
+    // 是否为 Safari 浏览器
+    const isSafari = ref<boolean>(/Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent));
+    return {isSafari}
+  },
   data() {
     return {
       isOnTop: true,
@@ -267,9 +272,19 @@ export default defineComponent({
   transition: padding-top .3s ease-out, background-color .3s ease-out;
   -webkit-transition: padding-top .3s ease-out, background-color .3s ease-out;
 
+  &.safari{
+    background-color: rgba(255,255,255,1);
+    border-bottom: 1px solid #dfdfdf;
+    box-shadow: 0 0 6px #c9c9c9;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
   &.on-top {
     color: $maxer-nav-item-normal-color;
     padding-top: 5px;
+    border: none;
+    box-shadow: none;
     background: rgba(0, 0, 0, 0);
     backdrop-filter: saturate(100%) blur(0);
     -webkit-backdrop-filter: saturate(100%) blur(0);

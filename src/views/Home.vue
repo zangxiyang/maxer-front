@@ -17,28 +17,22 @@
           </template>
         </maxer-tab>
       </div>
-      <!--启用侧边栏-->
-      <!--<div class="aside-container">
-        &lt;!&ndash; 侧边栏 &ndash;&gt;
-        &lt;!&ndash; 每日一言 &ndash;&gt;
-        <aside-day-sentence/>
-        &lt;!&ndash; 最新评论 &ndash;&gt;
-        <aside-comments/>
-        &lt;!&ndash; 金主 &ndash;&gt;
-        <aside-ads/>
-      </div>-->
+
+      <div class="explore-container mt-20">
+        <!--探索更多-->
+        <explore-more/>
+      </div>
     </div>
   </main>
 </template>
 
 <script lang="ts">
-import {defineComponent, computed, ref, provide, reactive} from 'vue';
+import {defineComponent, provide, reactive} from 'vue';
 import MaxerCarousel, {CarouselItems} from "@/components/MaxerCarousel.vue";
 import PostList from "@/components/PostList.vue";
-
-import MaxerHeader from "@/layout/MaxerHeader.vue";
 import MaxerTab from "@/components/MaxerTab.vue";
-import WeChat from "@/components/WeChat/WeChat.vue"; // @ is an alias to /src
+import WeChat from "@/components/WeChat/WeChat.vue";
+import ExploreMore from "@/components/ExploreMore.vue";
 
 interface Wechat{
   isLoading: boolean;
@@ -84,12 +78,10 @@ export default defineComponent({
     }
   },
   components: {
+    ExploreMore,
     WeChat,
     MaxerTab,
     MaxerCarousel,
-    /*AsideComments,
-    AsideDaySentence,
-    AsideAds,*/
     PostList,
   },
   methods: {
@@ -128,38 +120,12 @@ export default defineComponent({
     //background-color: #ececec;
     background-color: #f9f9f9;
   }
-
-  // tab
-  .tab-container {
-    .tab-item {
-      position: relative;
-      color: #585858;
-      font-size: 15px;
-      cursor: pointer;
-      user-select: none;
-      -webkit-user-select: none;
-
-      &.active {
-        font-size: 20px;
-        color: #202020;
-        font-weight: 600;
-        transition: .3s ease-out;
-      }
-
-      &:not(:last-child):after {
-        content: '/';
-        margin-right: 5px;
-        font-size: 15px;
-        color: #111111;
-        cursor: default;
-      }
-    }
+  // 探索更多
+  .explore-container{
+    background-color: #f9f9f9;
+    padding: 24px;
+    border-radius: 10px;
   }
 
-  // 侧边栏
-  .aside-container {
-    max-width: 350px;
-    flex: 1;
-  }
 }
 </style>

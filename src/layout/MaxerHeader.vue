@@ -6,9 +6,7 @@
           <div class="f-jc-c al-c">
             <span id="typed" class="typed-text"></span>
           </div>
-          <div class="mt-15 f-jc-c al-c">
-            <div id="hitokoto" class="typed-text hitokoto"></div>
-          </div>
+          <div id="hitokoto" class="typed-text hitokoto mt-15"></div>
         </div>
       </div>
     </div>
@@ -58,7 +56,7 @@ export default defineComponent({
       this.hitokoto = (data as any).data
       this.hitokotos.push(`${this.hitokoto.hitokoto} ^1000`)
       new Typed('#hitokoto', {
-        strings: [`<div>${this.hitokoto.hitokoto}</div><div class="f-jc-r al-c mt-15"><div style="height: 2px;width: 30px;background: #fff;"></div><span>${this.hitokoto.from_who ? this.hitokoto.from_who + '^500':''} 「${this.hitokoto.from}」</span></div>`],
+        strings: [`<div class="f-jc-c al-c">${this.hitokoto.hitokoto}</div><div class="f-jc-r al-c mt-15"><div style="height: 2px;width: 30px;background: #fff;"></div><span>${this.hitokoto.from_who ? this.hitokoto.from_who + '^500' : ''} 「${this.hitokoto.from}」</span></div>`],
         typeSpeed: 50,
         showCursor: false,
       })
@@ -108,7 +106,7 @@ export default defineComponent({
       font-size: 30px;
       text-shadow: 0 0 .3125rem #1c1f21;
 
-      &.hitokoto{
+      &.hitokoto {
         font-size: 24px;
       }
     }
