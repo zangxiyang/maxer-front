@@ -117,3 +117,20 @@
     border-width: 1px;
   }
 }
+.maxer-main-container{
+  padding: 24px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  min-height: 500px;
+}
+.maxer-title-container {
+  color: #202020;
+  font-weight: 600;
+  height: 40px;
+  font-size: 20px;
+  .title-wrap{
+    @extend .f-jc-c;
+    @extend .al-c;
+    min-height: 40px;
+  }
+}

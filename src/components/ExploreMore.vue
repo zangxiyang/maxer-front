@@ -1,14 +1,14 @@
 <template>
   <div class="maxer-title-container">
-    <div class="title-wrap f-jc-c al-b" style="height: 40px">
+    <div class="title-wrap">
       探索更多
     </div>
     <title-line/>
   </div>
-  <div class="explore-content mt-15">
+  <div class="explore-content mt-20">
     <el-row type="flex" :gutter="10">
       <el-col :xl="8">
-        <explore-more-item title="留言板" desc="说你想说，做你想做。" image-url="https://imgcdn.imsle.com/images/2021/02/04/wallhaven-dpgdmj.md.jpg"/>
+        <explore-more-item title="留言板" desc="说你想说，做你想做" image-url="https://imgcdn.imsle.com/images/2021/02/04/wallhaven-dpgdmj.md.jpg"/>
       </el-col>
       <el-col :xl="8">
         <explore-more-item title="关于我" desc="关于本站和本人的介绍" image-url="https://imgcdn.imsle.com/images/2021/02/04/wallhaven-l3mkzl.md.jpg"/>
@@ -39,12 +39,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 
-.maxer-title-container {
-  color: #202020;
-  font-weight: 600;
-  height: 40px;
-  font-size: 20px;
-}
+
 
 .explore-content{
 

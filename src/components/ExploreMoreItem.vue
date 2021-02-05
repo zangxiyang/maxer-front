@@ -3,7 +3,7 @@
     <div class="f-jc-c al-c none-select">
       <div class="flex f-col">
         <div class="cover">
-          <img :src="imageUrl" alt="" :class="{'animate__animated animate__heartBeat':isHover}">
+          <img :src="imageUrl" alt="" :class="{'animate__animated animate__heartBeat animate__slow':isHover}">
         </div>
         <div class="content">
           <div class="title">{{ title }}</div>
@@ -47,7 +47,7 @@ export default defineComponent({
   box-sizing: border-box;
   position: relative;
   border-radius: 10px;
-  margin-top: 10px;
+  margin-bottom: 20px;
   padding: 20px 15px;
   color: #fff;
   font-size: 16px;
@@ -72,10 +72,16 @@ export default defineComponent({
 
     .title {
       font-size: 1.5rem;
+      width: 230px;
     }
 
     .desc {
+      width: 230px;
+      font-size: 15px;
       padding-top: 10px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
     }
   }
 

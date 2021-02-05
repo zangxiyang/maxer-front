@@ -17,26 +17,31 @@
                         text="首页"
                         route="/"
                         :nav-index="0"
+                        name="Home"
                         @click="navItemOnClick"/>
               <nav-item icon="iconicon9"
                         :nav-index="1"
                         route="/article"
                         text="文章"
+                        name="Article"
                         @click="navItemOnClick"/>
               <nav-item icon="iconzuopin"
                         text="分类"
-                        route="/about"
+                        route="/category"
+                        name="Category"
                         :nav-index="2"
                         is-more
                         @click="navItemOnClick"/>
               <nav-item icon="iconwenda"
                         text="微聊"
-                        route="/"
+                        route="/wechat"
+                        name="Wechat"
                         :nav-index="3"
                         @click="navItemOnClick"/>
               <nav-item icon="icongengduo"
                         text="更多"
-                        route="/"
+                        route="/more"
+                        name="More"
                         :is-more="true"
                         :nav-index="4"
                         @click="navItemOnClick"/>
@@ -166,6 +171,7 @@
 
 <script lang="ts">
 import {defineComponent, ref} from 'vue'
+import { useRouter} from "vue-router";
 import NavItem from "@/components/navItem.vue";
 import MxButton from "@/components/MxButton.vue";
 import IconFont from "@/components/IconFont.vue";
@@ -174,9 +180,10 @@ import PopNavItem from "@/components/popNavItem.vue";
 export default defineComponent({
   name: 'HeaderNav',
   components: {PopNavItem, IconFont, MxButton, NavItem},
-  setup(){
+  setup() {
     // 是否为 Safari 浏览器
     const isSafari = ref<boolean>(/Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent));
+
     return {isSafari}
   },
   data() {
@@ -199,10 +206,13 @@ export default defineComponent({
       },
       // navItems宽度
       navItemsWidth: [] as Array<number>,
+      // navItems hash
+      navItemsHash: new Map<string,number>(),
       // 指示器相关参数
       indicator: {
         width: 0,
-        left: 0
+        left: 0,
+        index: ''
       }
 
     }
@@ -236,14 +246,29 @@ export default defineComponent({
     window.addEventListener("scroll", this.handleScroll);
     // test
     // this.$m.vuex('vuexIsLogin', true);
-
-    // 计算 header nav item 宽度
-    (this as any).$refs.navs.childNodes.forEach((nav: Element) => {
-      this.navItemsWidth.push(nav.clientWidth)
+    (this as any).$refs.navs.childNodes.forEach((nav: Element,index: number) => {
+      // 计算 header nav item 宽度
+      this.navItemsWidth.push(nav.clientWidth);
+      console.log(nav.getAttribute('name'));
+      // 绑定 nav item 的hashMap
+      this.navItemsHash.set(nav.getAttribute('name') as string,index)
     })
+
     // 默认指向首页
     this.indicator.width = this.navItemsWidth[0] - 20;
     this.indicator.left = (this.navItemsWidth[0] - this.indicator.width) / 2;
+
+    // 获取Route meta 信息来确定指针的位置
+    const router = useRouter();
+    router.beforeEach(async (to, from, next) => {
+      this.indicator.index = to.name as string;
+      // 更改路由的时候立即通知指示器更新
+      this.navItemOnClick(this.navItemsHash.get(this.indicator.index) as number)
+      next();
+    })
+
+
+
 
   },
   unmounted() {
@@ -272,8 +297,8 @@ export default defineComponent({
   transition: padding-top .3s ease-out, background-color .3s ease-out;
   -webkit-transition: padding-top .3s ease-out, background-color .3s ease-out;
 
-  &.safari{
-    background-color: rgba(255,255,255,1);
+  &.safari {
+    background-color: rgba(255, 255, 255, 1);
     border-bottom: 1px solid #dfdfdf;
     box-shadow: 0 0 6px #c9c9c9;
     backdrop-filter: none !important;
@@ -328,7 +353,8 @@ export default defineComponent({
       color: $maxer-nav-item-normal-color;
     }
   }
-  .nav-bottom-indicator{
+
+  .nav-bottom-indicator {
     background-color: $maxer-nav-item-normal-color !important;
   }
 }

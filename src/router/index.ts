@@ -3,7 +3,7 @@ import Home from '../views/Home.vue'
 import nProgress from "nprogress";
 import 'nprogress/nprogress.css'
 import HomeHeaderView from "@/layout/HomeHeaderView.vue";
-import About from "@/views/About.vue";
+import About from "@/views/Category.vue";
 
 const routes: Array<RouteRecordRaw> = [
     {
@@ -12,22 +12,46 @@ const routes: Array<RouteRecordRaw> = [
         component: HomeHeaderView,
         children:[
             {
-                path: '/',
+                path: '/home',
                 component: Home,
                 name: 'Home',
+                alias: '/',
                 meta:{
-                    keepAlive: true
+                    keepAlive: true,
+                    indexName: 'Home'
                 }
             },
             {
-                path: '/about',
-                name: 'About',
-                component: About
+                path: '/category',
+                name: 'Category',
+                component: About,
+                meta:{
+                    indexName: 'Category'
+                }
             },
             {
                 path: '/article',
                 name: 'Article',
-                component:() => import('../views/Article.vue')
+                component:() => import('../views/Article.vue'),
+                meta:{
+                    indexName: 'Article'
+                }
+            },
+            {
+                path: '/wechat',
+                name: 'Wechat',
+                component: ()=> import('../views/WeChat.vue'),
+                meta:{
+                    indexName: 'Wechat'
+                }
+            },
+            {
+                path: '/more',
+                name: 'More',
+                component: ()=> import('../views/More.vue'),
+                meta:{
+                    indexName: 'More'
+                }
             }
         ]
     }/*,
@@ -37,7 +61,7 @@ const routes: Array<RouteRecordRaw> = [
         // route level code-splitting
         // this generates a separate chunk (about.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
-        component: () => import(/!* webpackChunkName: "about" *!/ '../views/About.vue')
+        component: () => import(/!* webpackChunkName: "about" *!/ '../views/Category.vue')
     },
     {
         path: '/article',
