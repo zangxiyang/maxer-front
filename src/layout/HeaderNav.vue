@@ -223,6 +223,16 @@ export default defineComponent({
       const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
       this.isOnTop = scrollTop <= 50;
     },
+    // 登录
+    login(){
+      console.log("模拟登录");
+      this.$m.vuex('vuexIsLogin',true);
+    },
+    // 注册
+    register(){
+      //TODO 注册
+      console.log("注册被点击")
+    },
     // 退出登录
     logout() {
       //TODO

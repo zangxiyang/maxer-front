@@ -6,7 +6,7 @@
 
 
       <div class="main-container mt-10">
-        <maxer-tab :tabs="['文章','微聊']" v-model:index="tab.index" @click="homeTabOnClick">
+        <maxer-tab :tabs="['精选','微聊']" v-model:index="tab.index" @click="homeTabOnClick">
           <template v-slot:0>
             <post-list/>
           </template>
