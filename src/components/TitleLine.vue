@@ -32,7 +32,7 @@ export default defineComponent({
     box-sizing: inherit;
     width: 64px;
     height: 100%;
-    background: linear-gradient(90deg, rgba(24, 144, 255, 0) 0, #9c6328);
+    background: linear-gradient(90deg, rgba(196, 175, 124,0) 0, #9c6328);
     transform: translateX(-64px);
     animation: titleLine 3s ease-in-out 1.5s infinite;
   }
