@@ -54,7 +54,7 @@ const routes: Array<RouteRecordRaw> = [
                 }
             }
         ]
-    }/*,
+    },/*
     {
         path: '/about',
         name: 'About',
@@ -68,6 +68,12 @@ const routes: Array<RouteRecordRaw> = [
         name: 'Article',
         component: () => import('../views/Article.vue')
     }*/
+    {
+        path: '/category/:id',
+        name: 'CategoryList',
+        component: ()=> import('../views/CategoryList.vue'),
+        props: true
+    }
 ]
 
 const router = createRouter({
