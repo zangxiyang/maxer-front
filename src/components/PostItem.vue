@@ -172,8 +172,8 @@ export default defineComponent({
   .post-info {
     width: 100%;
     .post-title {
-      font-size: 18px;
-      font-weight: 600;
+      font-size: 17px;
+      letter-spacing: 1px;
       margin-bottom: 12px;
 
     }
@@ -201,7 +201,9 @@ export default defineComponent({
       }
 
       .post-author-name {
+        font-size: 15px;
         margin-left: 10px;
+        letter-spacing: .5px;
         color: #292925;
       }
 

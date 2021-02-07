@@ -6,10 +6,14 @@ $maxer-medias: (
         lg: 1200px
 );
 
+// 引入Google 思源宋体
+
+
 // 字体变量
-$maxer-site-font-family: -apple-system,"Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
-$maxer-article-font-family:0;
-$maxer-code-font-family: Menlo,Monaco,Consolas,monospace;
+
+$maxer-article-font-family: 'Roboto Slab',"Noto Serif SC",-apple-system,serif,"Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+$maxer-site-font-family: 'Roboto Slab',-apple-system,"Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+$maxer-code-font-family: 'Fira Mono',Menlo,Monaco,Consolas,monospace;
 
 // 颜色变量
 $maxer-nav-item-normal-color: #fff; // 头部导航item常规颜色

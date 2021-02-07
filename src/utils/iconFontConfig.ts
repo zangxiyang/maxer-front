@@ -1,6 +1,6 @@
 // iconfont配置
 
-const iconfontUrl = '//at.alicdn.com/t/font_2121686_egug9zk9m6.js';
+const iconfontUrl = '//at.alicdn.com/t/font_2121686_hr8tyq6ux2.js';
 
 export default function initIconFont(): void {
     const remoteScript = document.createElement('script');

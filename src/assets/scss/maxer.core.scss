@@ -28,8 +28,11 @@ body{
 /*--------------- 字体设置开始 ----------------*/
 body{
   font-family: $maxer-site-font-family;
+  scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
 }
 /*--------------- 字体设置结束 ----------------*/
 

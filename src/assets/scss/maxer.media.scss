@@ -2,6 +2,9 @@
   // 当设备宽度 < 768px 一般指手机设备
   .maxer-container{
     max-width: 540px;
+    &.maxer-article{
+      max-width: 440px;
+    }
   }
 }
 
@@ -9,6 +12,9 @@
   // 当设备宽度 ≥ 768px 一般指平板设备
   .maxer-container{
     max-width: 720px;
+    &.maxer-article{
+      max-width: 610px;
+    }
   }
 }
 
@@ -16,6 +22,9 @@
   // 当设备宽度 ≥ 992px 一般指中型台式机
   .maxer-container{
     max-width: 960px;
+    &.maxer-article{
+      max-width: 720px;
+    }
   }
 }
 
@@ -23,5 +32,8 @@
   // 当设备宽度 ≥ 1200px 一般指大型台式机
   .maxer-container{
     max-width: 1140px;
+    &.maxer-article{
+      max-width: 860px;
+    }
   }
 }

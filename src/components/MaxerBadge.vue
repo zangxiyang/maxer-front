@@ -1,5 +1,5 @@
 <template>
-  <el-tooltip effect="light" :content="content" placement="top">
+  <el-tooltip effect="light" :content="content" placement="top" v-if="isPopover">
     <span
         class="maxer-badge none-select"
         :style="[{marginLeft: `${left ? left:0}px`},
@@ -9,6 +9,15 @@
     <span>{{ title }}</span>
   </span>
   </el-tooltip>
+  <span
+      v-else
+      class="maxer-badge none-select"
+      :style="[{marginLeft: `${left ? left:0}px`},
+        {marginRight: `${right? right:0}px`},
+        {backgroundColor: themeColor}]">
+      <icon-font :name="icon" :size="iconSize+'px'" right="3px" v-if="isIcon"/>
+    <span>{{ title }}</span>
+  </span>
 </template>
 
 <script lang="ts">
@@ -27,7 +36,7 @@ export default defineComponent({
   components: {IconFont},
   props: {
     title: String,
-    isIcon:{
+    isIcon: {
       type: Boolean,
       default: false
     },
@@ -35,15 +44,19 @@ export default defineComponent({
     iconSize: Number,
     left: Number,
     right: Number,
+    isPopover: {
+      type: Boolean,
+      default: false
+    },
     content: String,
     color: {
       type: String,
       default: 'super'
     }
   },
-  setup(props: any){
+  setup(props: any) {
     const themeColor = ref<string>(props.color);
-    switch (themeColor.value){
+    switch (themeColor.value) {
       case 'danger':
         themeColor.value = '#F56C6C';
         break;
@@ -57,7 +70,7 @@ export default defineComponent({
         themeColor.value = '#35b92c';
         break;
       case 'super':
-        themeColor.value =  '#fb7299';
+        themeColor.value = '#fb7299';
         break;
     }
     return {themeColor}
@@ -69,6 +82,8 @@ export default defineComponent({
 @import "src/assets/scss/maxer.variables";
 
 .maxer-badge {
+  font-family: $maxer-site-font-family;
+  font-weight: normal;
   font-size: 13px;
   padding: 3px 5px;
   background-color: $maxer-userName-super-color;
