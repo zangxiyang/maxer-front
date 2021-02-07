@@ -7,8 +7,8 @@
         </div>
         <div class="we-container flex f-col">
           <div class="userName flex al-c">
-            <el-skeleton-item variant="text" style="width: 100px;margin-right: 10px"/>
-            <el-skeleton-item variant="text" style="width: 200px"/>
+            <el-skeleton-item variant="text" style="width: 30%;margin-right: 10px"/>
+            <el-skeleton-item variant="text" style="width: 40%"/>
           </div>
           <div class="content">
             <el-skeleton-item variant="text"/>

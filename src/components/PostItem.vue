@@ -139,9 +139,7 @@ export default defineComponent({
 
 .maxer-post-item-container {
   position: relative;
-  max-width: 33.3%;
   padding: 5px;
-  flex: 1 1 auto;
 }
 
 .maxer-post-item {

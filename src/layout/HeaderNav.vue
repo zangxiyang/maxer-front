@@ -167,7 +167,27 @@
         </div>
       </div>
     </nav>
-    <nav class="nav-container hidden-lg-and-up">TODO 手机端</nav>
+    <nav class="nav-container hidden-lg-and-up">
+      <div>TODO 手机端</div>
+      <ul style="display: flex;justify-content: space-around;list-style: none"
+      :style="{'color':isOnTop?'#fff':''}">
+        <li>
+          <router-link to="/">首页</router-link>
+        </li>
+        <li>
+          <router-link to="/article">文章</router-link>
+        </li>
+        <li>
+          <router-link to="/category">分类</router-link>
+        </li>
+        <li>
+          <router-link to="/wechat">微聊「本版本不开放」</router-link>
+        </li>
+        <li>
+          <router-link to="/more">更多</router-link>
+        </li>
+      </ul>
+    </nav>
   </div>
 </template>
 
@@ -292,6 +312,14 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 @import "../assets/scss/maxer.variables";
+
+
+// TODO 手机端
+ul>li>a{
+  color: inherit;
+}
+
+
 
 .navbar {
   color: $maxer-nav-dropdown-item-normal-color;
