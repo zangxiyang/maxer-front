@@ -9,22 +9,22 @@
       </div>
       <div class="maxer-more-container none-select mt-20">
         <el-row type="flex" :gutter="20">
-          <el-col :xl="8">
+          <el-col :lg="6" :md="8" :sm="12">
             <explore-more-item title="从服务器获取的" desc="从服务asdasdasdasda器获取的从服务器获取的从服务器获取的从服务器获取的" image-url="https://imgcdn.imsle.com/images/2021/02/04/wallhaven-dpgdmj.md.jpg"/>
           </el-col>
-          <el-col :xl="8">
+          <el-col :lg="6" :md="8" :sm="12">
             <explore-more-item title="从服务器获取的" desc="从服务器获取的" image-url="https://imgcdn.imsle.com/images/2021/02/04/wallhaven-dpgdmj.md.jpg"/>
           </el-col>
-          <el-col :xl="8">
+          <el-col :lg="6" :md="8" :sm="12">
             <explore-more-item title="从服务器获取的" desc="从服务器获取的" image-url="https://imgcdn.imsle.com/images/2021/02/04/wallhaven-dpgdmj.md.jpg"/>
           </el-col>
-          <el-col :xl="8">
+          <el-col :lg="6" :md="8" :sm="12">
             <explore-more-item title="从服务器获取的" desc="从服务器获取的" image-url="https://imgcdn.imsle.com/images/2021/02/04/wallhaven-dpgdmj.md.jpg"/>
           </el-col>
-          <el-col :xl="8">
+          <el-col :lg="6" :md="8" :sm="12">
             <explore-more-item title="从服务器获取的" desc="从服务器获取的" image-url="https://imgcdn.imsle.com/images/2021/02/04/wallhaven-dpgdmj.md.jpg"/>
           </el-col>
-          <el-col :xl="8">
+          <el-col :lg="6" :md="8" :sm="12">
             <explore-more-item title="从服务器获取的" desc="从服务器获取的" image-url="https://imgcdn.imsle.com/images/2021/02/04/wallhaven-dpgdmj.md.jpg"/>
           </el-col>
 

@@ -1,16 +1,19 @@
 <template>
-  <div class="maxer-post-lists flex f-wrap animate__animated animate__fadeIn">
-    <post-item/>
-    <post-item/>
-    <post-item/>
-    <post-item/>
-    <post-item/>
-    <post-item/>
-    <template v-if="loading">
-      <post-item is-skeleton/>
-      <post-item is-skeleton/>
-      <post-item is-skeleton/>
-    </template>
+  <div class="maxer-post-lists animate__animated animate__fadeIn">
+    <el-row type="flex" :gutter="20">
+      <post-item/>
+      <post-item/>
+      <post-item/>
+      <post-item/>
+      <post-item/>
+      <post-item/>
+      <template v-if="loading">
+        <post-item is-skeleton/>
+        <post-item is-skeleton/>
+        <post-item is-skeleton/>
+      </template>
+    </el-row>
+
   </div>
   <div class="maxer-post-loadMore f-jc-c al-c" v-show="!loading">
     <div class="maxer-border-button" @click="loadMore">

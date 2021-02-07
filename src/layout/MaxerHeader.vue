@@ -4,7 +4,7 @@
       <div class="maxer-container" style="height: 100%">
         <div class="f-jc-c f-col" style="height: 100%">
           <div class="f-jc-c al-c">
-            <span id="typed" class="typed-text"></span>
+            <span id="typed" class="typed-text flex al-c"></span>
           </div>
           <div id="hitokoto" class="typed-text hitokoto mt-15"></div>
         </div>
@@ -102,8 +102,8 @@ export default defineComponent({
       font-family: -apple-system, serif, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Serif SC", "PingFang SC", "Microsoft Yahei UI", "Microsoft Yahei", serif;
       height: 38px;
       font-weight: 600;
+      padding: 0 15px;
       color: #eeeeee;
-      font-size: 30px;
       text-shadow: 0 0 .3125rem #1c1f21;
 
       &.hitokoto {
@@ -126,7 +126,7 @@ export default defineComponent({
 
 <style>
 .typed-cursor {
-  font-size: 30px;
   color: #eee;
+  margin-left: -15px;
 }
 </style>

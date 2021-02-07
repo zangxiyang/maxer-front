@@ -113,8 +113,6 @@ export default defineComponent({
   padding-bottom: 20px;
   // 主容器
   .main-container {
-    min-width: 700px;
-    flex: 1;
     padding: 24px;
     border-radius: 10px;
     //background-color: #ececec;

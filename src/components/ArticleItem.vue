@@ -34,7 +34,6 @@
     <div class="article-header">
       <el-image
           style="height: 100%;width: 100%;"
-          fit="cover"
           :src="imageUrl">
         <template v-slot:placeholder>
           <el-skeleton animated style="height: 100%;width: 100%;">
@@ -173,7 +172,6 @@ export default defineComponent({
     margin-top: 0;
   }
   .article-header{
-    height: 250px;
     position: relative;
     background-color: #ababab;
   }
@@ -186,8 +184,6 @@ export default defineComponent({
       }
       h2{
         display: block;
-        font-size: 1.4em;
-        line-height: 1.4em;
         color: #1c1f21;
         font-weight: bold;
         font-family: $maxer-article-font-family;

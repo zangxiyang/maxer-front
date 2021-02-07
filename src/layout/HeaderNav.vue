@@ -1,6 +1,6 @@
 <template>
   <div id="header-nav" class="navbar" :class="[{'on-top':isOnTop},{'safari':isSafari}]">
-    <nav class="nav-container">
+    <nav class="nav-container hidden-md-and-down">
       <div class="navigation maxer-container f-jc-sb al-c">
         <div class="logo-nav-group flex al-c">
           <div class="logo">
@@ -57,31 +57,6 @@
         <div class="user-group flex al-c">
           <template v-if="vuexIsLogin">
             <!-- 已登录 -->
-            <div class="message-container">
-              <!-- 消息面板 -->
-              <el-popover
-                  placement="bottom"
-                  :width="230"
-                  trigger="hover"
-                  :show-arrow="true"
-                  popper-class="user-info-container import i"
-                  :offset="10"
-                  :show-after="300"
-                  :close-delay="450"
-              >
-                <template #reference>
-                  <el-badge is-dot type="danger" class="cur-p">
-                    <span>消息</span>
-                  </el-badge>
-                </template>
-                <div class="message-warp">
-                  <pop-nav-item text="回复我的" icon="iconliaotian1" icon-size="16px" :dot-value="999"/>
-                  <pop-nav-item text="我的消息" icon="iconyouxiang" icon-size="16px" :dot-value="10"/>
-                  <pop-nav-item text="系统消息" icon="icontongzhi1" icon-size="16px" :dot-value="5"/>
-                </div>
-              </el-popover>
-
-            </div>
             <!-- 用户面板 -->
             <el-popover
                 placement="bottom"
@@ -155,6 +130,32 @@
                 </div>
               </div>
             </el-popover>
+            <div class="message-container">
+              <!-- 消息面板 -->
+              <el-popover
+                  placement="bottom"
+                  :width="230"
+                  trigger="hover"
+                  :show-arrow="true"
+                  popper-class="user-info-container import i"
+                  :offset="10"
+                  :show-after="300"
+                  :close-delay="450"
+              >
+                <template #reference>
+                  <el-badge is-dot type="danger" class="cur-p">
+                    <span>消息</span>
+                  </el-badge>
+                </template>
+                <div class="message-warp">
+                  <pop-nav-item text="回复我的" icon="iconliaotian1" icon-size="16px" :dot-value="999"/>
+                  <pop-nav-item text="我的消息" icon="iconyouxiang" icon-size="16px" :dot-value="10"/>
+                  <pop-nav-item text="系统消息" icon="icontongzhi1" icon-size="16px" :dot-value="5"/>
+                </div>
+              </el-popover>
+
+            </div>
+
           </template>
           <template v-else>
             <!-- 未登录 -->
@@ -166,6 +167,7 @@
         </div>
       </div>
     </nav>
+    <nav class="nav-container hidden-lg-and-up">TODO 手机端</nav>
   </div>
 </template>
 
@@ -350,7 +352,7 @@ export default defineComponent({
 // 用户容器
 .user-group {
   .message-container {
-    margin-right: 25px;
+    margin-left: 28px;
   }
 }
 

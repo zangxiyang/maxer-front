@@ -9,21 +9,21 @@
       </div>
       <div class="category-container none-select">
         <el-row type="flex" :gutter="25">
-          <el-col :xl="6">
+          <el-col :lg="6" :md="8" :sm="12">
             <category-item title="开发" desc="这是一个没有技术含量的分类这是一个没有技术含量的分类"/>
           </el-col>
-          <el-col :xl="6">
+          <el-col :lg="6" :md="8" :sm="12">
               <category-item title="开发" desc="这是一个没有技术含量的分类这是一个没有技术含量的分类"/>
 
           </el-col>
-          <el-col :xl="6">
+          <el-col :lg="6" :md="8" :sm="12">
               <category-item title="开发" desc="这是一个没有技术含量的分类这是一个没有技术含量的分类"/>
 
           </el-col>
-          <el-col :xl="6">
+          <el-col :lg="6" :md="8" :sm="12">
               <category-item title="开发" desc="这是一个没有技术含量的分类这是一个没有技术含量的分类"/>
           </el-col>
-          <el-col :xl="6">
+          <el-col :lg="6" :md="8" :sm="12">
               <category-item title="开发" desc="这是一个没有技术含量的分类这是一个没有技术含量的分类"/>
           </el-col>
         </el-row>

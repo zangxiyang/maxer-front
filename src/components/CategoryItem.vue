@@ -51,28 +51,12 @@ export default defineComponent({
     color: #585858;
     z-index: 1;
     overflow: hidden;
-    transition: color .5s ease;
-
-    &:hover:before {
-      visibility: visible;
-      transform: translate3d(50%, -50%, 0) scale3d(200, 200, 200);
-    }
-
-    &:before {
-      content: '';
-      top: 50%;
-      right: 50%;
-      width: 1px;
-      height: 1px;
-      border-radius: 50%;
-      transform-origin: center;
-      visibility: hidden;
-      transform: transslate3d(50%, -50%, 0) scale3d(0, 0, 0);
+    transition: color .5s ease,background-color .3s ease-out;
+    -webkit-transition: color .5s ease,background-color .3s ease-out;
+    &:hover{
       background-color: #eaeaea;
-      position: absolute;
-      z-index: -1;
-      transition: transform .5s ease, visibility .5s ease;
-      -webkit-transition: transform .5s ease, visibility .5s ease;
+      transition: color .5s ease,background-color .3s ease-out;
+      -webkit-transition: color .5s ease,background-color .3s ease-out;
     }
 
     .cate-title {
