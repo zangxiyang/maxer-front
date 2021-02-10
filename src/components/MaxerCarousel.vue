@@ -124,8 +124,8 @@ export default defineComponent({
     }
   },
   mounted() {
-    console.log("初始化加载标识")
-    console.log(this.loadedFlags)
+    // console.log("初始化加载标识")
+    // console.log(this.loadedFlags)
   },
   methods: {
     initSwiper(swiper: any) {
@@ -138,18 +138,18 @@ export default defineComponent({
     },
     // 图片延迟加载开始
     lazyImageLoadingStart(swiper: any, slideEl: any) {
-      console.log("----延迟加载开始----")
+      // console.log("----延迟加载开始----")
       const index = slideEl.childNodes[0].getAttribute('maxer-carousel-index');
       this.loadedFlags[index] = false
     },
     // 图片延迟加载结束
     lazyImageLoadingReady(swiper: any, slideEl: any) {
-      console.log("----延迟加载完成----")
+      // console.log("----延迟加载完成----")
       const index = slideEl.childNodes[0].getAttribute('maxer-carousel-index');
-      console.log(index)
+      // console.log(index)
       this.loadedFlags[index] = true
       // 更改标识为 true 代表已经加载完成
-      console.log("---- 完成标识序列 ----")
+      // console.log("---- 完成标识序列 ----")
     }
   }
 })

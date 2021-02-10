@@ -31,6 +31,10 @@
       }
     }
   }
+  // card 适配
+  .maxer-card-container{
+    margin: 0 15px;
+  }
 }
 
 @mixin sm(){

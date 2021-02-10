@@ -9,10 +9,9 @@
       </template>
     </router-link>
     <div class="nav-item-more-container flex"
-         v-if="isMore" :class="{'show':isHover}"
-         >
-      <div class="more-item flex al-c">跟多</div>
-      <div class="more-item flex al-c">更多</div>
+         ref="moreContainer"
+         v-if="isMore" :class="{'show':isHover}">
+      <slot/>
     </div>
   </div>
 </template>
@@ -43,6 +42,9 @@ export default defineComponent({
     navOnClick(){
       this.$emit('click',this.navIndex, this.$refs['nav-item'])
     }
+  },
+  mounted() {
+    //
   }
 
 })
@@ -106,20 +108,7 @@ export default defineComponent({
       opacity: 1;
       transform: perspective(600px) rotateX(0deg);
     }
-    .more-item{
-      display: flex;
-      padding: 8px 12px;
-      cursor: pointer;
-      color: $maxer-text-normal-color;
-      transition: background-color .3s ease-out, color .3s ease-out;
-      -webkit-transition: background-color .3s ease-out, color .3s ease-out;
-      &:hover{
-        color: $maxer-a-hover-color;
-        background-color: $maxer-hover-default-background-color;
-        transition: background-color .3s ease-out, color .3s ease-out;
-        -webkit-transition: background-color .3s ease-out, color .3s ease-out;
-      }
-    }
+
   }
 }
 .on-top{

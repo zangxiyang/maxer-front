@@ -7,7 +7,7 @@
       </template>
     </div>
     <div class="maxer-sub-menu f-jc-c" :class="{'show':isMenuShow}" v-if="isSub">
-      <div class="menu-item flex al-c" v-for="item in subs" :key="item.text">
+      <div class="menu-item flex al-c" v-for="(item,index) in subs" :key="item.text" @click="subClick(index)">
         <icon-font :name="item.icon" right="10px"/>
         <span>{{item.text}}</span>
       </div>
@@ -23,6 +23,7 @@ import IconFont from "@/components/IconFont.vue";
 export default defineComponent({
   name: "MxButton",
   components: {IconFont},
+  emits:['subClick'],
   data(){
     return{
       isMenuShow: false,
@@ -40,6 +41,9 @@ export default defineComponent({
     },
     hoverOut(): void{
         this.isMenuShow = false;
+    },
+    subClick(index: number){
+      this.$emit('subClick',index)
     }
   }
 })

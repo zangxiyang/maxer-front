@@ -1,5 +1,20 @@
 <template>
-  <div class="explore-item" @mouseenter="onHover" @mouseleave="onDisHover">
+  <router-link :to="route" v-if="route">
+    <div class="explore-item" @mouseenter="onHover" @mouseleave="onDisHover">
+      <div class="f-jc-c al-c none-select">
+        <div class="flex f-col">
+          <div class="cover">
+            <img :src="imageUrl" alt="" :class="{'animate__animated animate__heartBeat animate__slow':isHover}">
+          </div>
+          <div class="content">
+            <div class="title">{{ title }}</div>
+            <div class="desc">{{ desc }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </router-link>
+  <div class="explore-item" @mouseenter="onHover" @mouseleave="onDisHover" v-else>
     <div class="f-jc-c al-c none-select">
       <div class="flex f-col">
         <div class="cover">
@@ -22,7 +37,7 @@ export default defineComponent({
   name: "ExploreMoreItem",
   props: {
     imageUrl: String,
-    toUrl: String,
+    route: String,
     title: String,
     desc: String
   },

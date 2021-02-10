@@ -31,7 +31,12 @@
                         name="Category"
                         :nav-index="2"
                         is-more
-                        @click="navItemOnClick"/>
+                        @click="navItemOnClick">
+                <nav-more-item title="分类1" @click="navCategoryMoreItemClick"/>
+                <nav-more-item title="分类2" @click="navCategoryMoreItemClick"/>
+                <nav-more-item title="分类3" @click="navCategoryMoreItemClick"/>
+                <nav-more-item title="分类4" @click="navCategoryMoreItemClick" route="/category/1"/>
+              </nav-item>
               <nav-item icon="iconwenda"
                         text="微聊"
                         route="/wechat"
@@ -42,9 +47,13 @@
                         text="更多"
                         route="/more"
                         name="More"
-                        :is-more="true"
+                        is-more
                         :nav-index="4"
-                        @click="navItemOnClick"/>
+                        @click="navItemOnClick">
+                <nav-more-item title="友情链接"/>
+                <nav-more-item title="留言板"/>
+                <nav-more-item title="关于"/>
+              </nav-item>
             </div>
             <!-- 指示器 -->
             <div class="nav-bottom-indicator"
@@ -161,7 +170,8 @@
             <!-- 未登录 -->
             <mx-button :is-sub="true"
                        :subs="rightButtonSubs"
-                       text="登录/注册"/>
+                       text="登录/注册"
+                       @subClick="loginOrRegisterOnClick"/>
           </template>
 
         </div>
@@ -170,7 +180,7 @@
     <nav class="nav-container hidden-lg-and-up">
       <div>TODO 手机端</div>
       <ul style="display: flex;justify-content: space-around;list-style: none"
-      :style="{'color':isOnTop?'#fff':''}">
+          :style="{'color':isOnTop?'#fff':''}">
         <li>
           <router-link to="/">首页</router-link>
         </li>
@@ -193,15 +203,16 @@
 
 <script lang="ts">
 import {defineComponent, ref} from 'vue'
-import { useRouter} from "vue-router";
+import {useRouter} from "vue-router";
 import NavItem from "@/components/navItem.vue";
 import MxButton from "@/components/MxButton.vue";
 import IconFont from "@/components/IconFont.vue";
 import PopNavItem from "@/components/popNavItem.vue";
+import NavMoreItem from "@/components/navMoreItem.vue";
 
 export default defineComponent({
   name: 'HeaderNav',
-  components: {PopNavItem, IconFont, MxButton, NavItem},
+  components: {NavMoreItem, PopNavItem, IconFont, MxButton, NavItem},
   setup() {
     // 是否为 Safari 浏览器
     const isSafari = ref<boolean>(/Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent));
@@ -229,7 +240,7 @@ export default defineComponent({
       // navItems宽度
       navItemsWidth: [] as Array<number>,
       // navItems hash
-      navItemsHash: new Map<string,number>(),
+      navItemsHash: new Map<string, number>(),
       // 指示器相关参数
       indicator: {
         width: 0,
@@ -246,12 +257,12 @@ export default defineComponent({
       this.isOnTop = scrollTop <= 50;
     },
     // 登录
-    login(){
+    login() {
       console.log("模拟登录");
-      this.$m.vuex('vuexIsLogin',true);
+      this.$m.vuex('vuexIsLogin', true);
     },
     // 注册
-    register(){
+    register() {
       //TODO 注册
       console.log("注册被点击")
     },
@@ -271,6 +282,23 @@ export default defineComponent({
       }
       this.indicator.width = widthIndicator;
       this.indicator.left = leftIndicator;
+    },
+    // 分类菜单下的子菜单被点击
+    navCategoryMoreItemClick(index: number) {
+      console.log(`第${index}个被点击了`);
+    },
+    //登录注册被点击
+    loginOrRegisterOnClick(index: number) {
+      switch (index) {
+        case 0:
+          // 登录
+            this.$router.push('/login');
+          break;
+        case 1:
+          // 注册
+            this.$router.push('/register');
+          break;
+      }
     }
   },
   mounted() {
@@ -278,12 +306,12 @@ export default defineComponent({
     window.addEventListener("scroll", this.handleScroll);
     // test
     // this.$m.vuex('vuexIsLogin', true);
-    (this as any).$refs.navs.childNodes.forEach((nav: Element,index: number) => {
+    (this as any).$refs.navs.childNodes.forEach((nav: Element, index: number) => {
       // 计算 header nav item 宽度
       this.navItemsWidth.push(nav.clientWidth);
-      console.log(nav.getAttribute('name'));
+      // console.log(nav.getAttribute('name'));
       // 绑定 nav item 的hashMap
-      this.navItemsHash.set(nav.getAttribute('name') as string,index)
+      this.navItemsHash.set(nav.getAttribute('name') as string, index)
     })
 
     // 默认指向首页
@@ -300,8 +328,6 @@ export default defineComponent({
     })
 
 
-
-
   },
   unmounted() {
     // 移除滚动监听
@@ -315,10 +341,9 @@ export default defineComponent({
 
 
 // TODO 手机端
-ul>li>a{
+ul > li > a {
   color: inherit;
 }
-
 
 
 .navbar {
