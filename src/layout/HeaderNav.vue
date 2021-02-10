@@ -56,8 +56,8 @@
               </nav-item>
             </div>
             <!-- 指示器 -->
-            <div class="nav-bottom-indicator"
-                 :style="[{left: `${indicator.left}px`},{width: `${indicator.width}px`}]"></div>
+            <div class="nav-bottom-indicator animate__animated animate__fadeIn"
+                 :style="[{left: `${indicator.left}px`},{width: `${indicator.width}px`}]" v-if="indicator.show"></div>
 
 
           </div>
@@ -245,7 +245,8 @@ export default defineComponent({
       indicator: {
         width: 0,
         left: 0,
-        index: ''
+        index: '',
+        show: true
       }
 
     }
@@ -323,8 +324,16 @@ export default defineComponent({
     router.beforeEach(async (to, from, next) => {
       this.indicator.index = to.name as string;
       // 更改路由的时候立即通知指示器更新
-      this.navItemOnClick(this.navItemsHash.get(this.indicator.index) as number)
+      if (this.navItemsHash.get(this.indicator.index) === undefined){
+        // 当不在hash内时，取消显示指示器
+        this.indicator.show = false;
+      }else{
+        this.indicator.show = true;
+        this.navItemOnClick(this.navItemsHash.get(this.indicator.index) as number);
+      }
       next();
+
+
     })
 
 
