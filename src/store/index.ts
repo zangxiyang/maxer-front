@@ -7,7 +7,11 @@ export default createStore({
     vuexUser:{
       test: 1,
       name: "测试名字"
-    }
+    },
+    // 缓存列表
+    vuexCacheView:[
+        'MaxerHeader','Home','Article','Login','More','Wechat','Register','Category'
+    ],
   },
   mutations: {
     $changeStore(state: any,payload: any){

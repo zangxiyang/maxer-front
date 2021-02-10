@@ -81,7 +81,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import "src/assets/scss/maxer.variables";
+@import "../assets/scss/maxer.variables";
 // header 样式
 #maxer-header {
   box-sizing: border-box;
