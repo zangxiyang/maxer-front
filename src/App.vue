@@ -1,6 +1,5 @@
 <template>
   <HeaderNav/>
-
   <router-view v-slot="{ Component}">
     <keep-alive :include="vuexCacheView">
       <component :is="Component"/>

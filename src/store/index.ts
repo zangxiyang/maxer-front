@@ -8,9 +8,10 @@ export default createStore({
       test: 1,
       name: "测试名字"
     },
+    // todo 提出
     // 缓存列表
     vuexCacheView:[
-        'MaxerHeader','Home','Article','Login','More','Wechat','Register','Category'
+        'MaxerHeader','Login','Register','HomeHeaderLayout','Home'
     ],
   },
   mutations: {
