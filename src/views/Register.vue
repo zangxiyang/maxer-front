@@ -93,6 +93,10 @@ export default defineComponent({
         else return false;
       });
     }
+  },
+  activated() {
+    // 初始化表单
+    (this as any).$refs['registerForm'].resetFields();
   }
 })
 </script>

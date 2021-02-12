@@ -53,7 +53,7 @@
   }
   // Header适配
   #maxer-header{
-    min-height: 300px;
+    min-height: 400px;
     #bigHalfCircle{
       display: none;
     }
@@ -78,6 +78,9 @@
     max-width: 960px;
     &.maxer-article{
       max-width: 720px;
+    }
+    #maxer-header{
+      min-height: 480px;
     }
   }
   // Header适配

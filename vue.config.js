@@ -7,6 +7,9 @@ const BASE_URL = process.env.NODE_ENV === 'production' ? '/' : '/'
 module.exports = {
     // 基本 URL
     publicPath: BASE_URL,
-    outputDir: 'dist', // 打包生成的生产环境构建文件的目录
 
+    // 打包生成的生产环境构建文件的目录
+    outputDir: 'dist',
+
+    lintOnSave: false
 }

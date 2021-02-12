@@ -4,6 +4,7 @@ import nProgress from "nprogress";
 import 'nprogress/nprogress.css'
 import About from "@/views/Category.vue";
 import HomeHeaderLayout from "@/layout/HomeHeaderLayout.vue";
+import NotFound from "@/views/NotFound.vue";
 
 const routes: Array<RouteRecordRaw> = [
      {
@@ -49,6 +50,15 @@ const routes: Array<RouteRecordRaw> = [
         }
     },
     {
+        path: '/article/:id',
+        name: 'ArticleDetail',
+        component: ()=> import('../views/ArticleDetail.vue'),
+        props: true,
+        meta:{
+            keepAlive: true
+        }
+    },
+    {
         path: '/login',
         name: 'Login',
         component: () => import('../views/Login.vue'),
@@ -63,6 +73,10 @@ const routes: Array<RouteRecordRaw> = [
         meta:{
             keepAlive: true
         }
+    },
+    {
+        path: "/:catchAll(.*)",
+        component: NotFound
     }
 ]
 
