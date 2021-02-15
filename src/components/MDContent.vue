@@ -22,7 +22,7 @@ export default defineComponent({
           'public static void main(String[] args){\n' +
           '    System.out.println("hello world");\n' +
           '}\n' +
-          '```' + `\n### 测试标题\n## 测试`,
+          '```' + `\n### 测试标题\n## 测试\n[maxertip]assd[/maxertip]`,
       mdHtml: '',
     }
   },

@@ -40,18 +40,18 @@ export class MaxerMarkdownIt {
         this.md.renderer.rules.link_open = (tokens, idx, options, env, self): string => {
             // 获取属性target的索引号，如果小于0说明没有该属性
             const aIndex = tokens[idx].attrIndex('target');
-            if (aIndex < 0 ){
+            if (aIndex < 0) {
                 tokens[idx].attrPush(['target', '_blank']);
-            }else {
+            } else {
                 //attrs:获取该标签的属性名及值，["target", "_blank"]
                 (tokens as any)[idx].attrs[aIndex][1] = '_blank';    // replace value of existing attr
             }
             console.log(tokens);
-            return self.renderToken(tokens,idx,options);
+            return self.renderToken(tokens, idx, options);
         }
 
         // eslint-disable-next-line @typescript-eslint/camelcase
-        this.md.renderer.rules.heading_open = (tokens, idx, options, env, self): string =>{
+        this.md.renderer.rules.heading_open = (tokens, idx, options, env, self): string => {
             console.log(tokens[idx])
 
             return `<${tokens[idx].tag} class="maxer-anchor-title" id="${tokens[idx + 1].content}">`;
@@ -63,17 +63,36 @@ export class MaxerMarkdownIt {
      * 新增拓展渲染规则
      * @private
      */
-    private static addNewRules(): void{
-        this.md.inline.ruler.push("MaxerTip",(state): any=>{
-            if (state.src === '[maxerTip]'){
-                console.log("MaxerTip->")
-                console.log(state)
-                alert("判定规则")
+    private static addNewRules(): void {
+        this.md.inline.ruler.push("MaxerTip", (state, silent): boolean => {
+            let text: string;
+            if (state.src.charCodeAt(state.pos) !== 0x5B/* [ */) return false;
+            const rex = /\[maxertip\](.+?)\[\/maxertip\]/i;
+
+            if (rex.test(state.src)) {
+                text = state.src.match(rex)?.[1] as string;
+            }else {
+                return false;
             }
+            // 提取标签内内容
+            state.src = text;
+            console.log(state)
+            if (!silent){
+                state.push('MaxerTipOpen','div',1);
+                state.md.inline.tokenize(state);
+                state.push('MaxerTipClose','div',-1);
+            }
+            return true;
         })
+
+        this.md.renderer.rules.MaxerTipOpen = (tokens, idx, options, env, self): string => {
+            return `<div>测试渲染`;
+        }
+        this.md.renderer.rules.MaxerTipClose = (tokens, idx, options, env, self): string => {
+            return `</div>`;
+        }
+
     }
-
-
 
 
     public static getInstance(): MarkdownIt {
