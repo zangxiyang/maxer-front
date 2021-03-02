@@ -6,6 +6,9 @@ import installElementPlus from './plugins/element';
 import installMaxerStore, {Maxer} from './store/maxer.mixin'
 import initStorePersistence from './store/store.persistence'
 import {ElMessage, ElNotification} from "element-plus";
+// 引入 yue.css 排版 css
+import 'yue.css/yue.css'
+// 引入 maxer 核心 scss
 import './assets/scss/maxer.core.scss'
 // 引入iconfont
 import initIconFont from "@/utils/iconFontConfig";
@@ -15,6 +18,7 @@ import 'animate.css';
 import vueLazyLoad from 'vue3-lazyload';
 // 替换 nprogress 默认样式
 import '@/assets/css/nprogress.css';
+
 
 
 // 声明全局组件

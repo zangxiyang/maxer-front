@@ -21,7 +21,7 @@ export class MaxerMarkdownIt {
         linkify: true,    // 转换类似为链接的文本为a标签
         highlight: (str: string, lang: string, attrs: string): string => {
             if (lang && hljs.getLanguage(lang)) {
-                return '<pre class="hljs"><code>' +
+                return '<pre class="hljs maxer-code"><code>' +
                     hljs.highlight(lang, str, true).value +
                     '</code></pre>';
             }
@@ -46,15 +46,18 @@ export class MaxerMarkdownIt {
                 //attrs:获取该标签的属性名及值，["target", "_blank"]
                 (tokens as any)[idx].attrs[aIndex][1] = '_blank';    // replace value of existing attr
             }
-            console.log(tokens);
+            // console.log(tokens);
             return self.renderToken(tokens, idx, options);
         }
 
         // eslint-disable-next-line @typescript-eslint/camelcase
         this.md.renderer.rules.heading_open = (tokens, idx, options, env, self): string => {
-            console.log(tokens[idx])
-
-            return `<${tokens[idx].tag} class="maxer-anchor-title" id="${tokens[idx + 1].content}">`;
+            // console.log(tokens[idx])
+            if (tokens[idx].tag === 'h2'){
+                // 当前版本只支持对h2的 anchor 链接
+                return `<${tokens[idx].tag} class="maxer-anchor-title" id="${tokens[idx + 1].content}">`;
+            }
+            return `<${tokens[idx].tag}>`;
         }
 
     }
@@ -76,7 +79,7 @@ export class MaxerMarkdownIt {
             }
             // 提取标签内内容
             state.src = text;
-            console.log(state)
+            // console.log(state)
             if (!silent){
                 state.push('MaxerTipOpen','div',1);
                 state.md.inline.tokenize(state);

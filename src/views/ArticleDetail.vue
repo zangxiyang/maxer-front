@@ -6,11 +6,6 @@
         <el-col :lg="19">
           <div class="maxer-article-container">
             <m-d-content/>
-            <h2 class="maxer-anchor-title" id="测试标题">测试标题</h2>
-            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-            <h2 class="maxer-anchor-title" id="测试标题2">测试标题2</h2>
-            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-            <h2 class="maxer-anchor-title" id="测试标题3">测试标题3</h2>
           </div>
         </el-col>
         <el-col :lg="5">
@@ -22,17 +17,8 @@
                   <span>目录</span>
                 </div>
                 <div class="toc-content">
-                  <div class="toc-title">
-                    2020年德国一日游等等等等等等
-                  </div>
-                  <div class="toc-title">
-                    一级标题
-                  </div>
-                  <div class="toc-title">
-                    一级标题
-                  </div>
-                  <div class="toc-title">
-                    一级标题
+                  <div class="toc-title" v-for="title in anchorTitles" :key="title.titleName" @click="goToTop(title.topOffset)">
+                    {{title.titleName}}
                   </div>
                 </div>
               </div>
@@ -60,6 +46,8 @@ import ArticleHeader from "@/components/ArticleHeader.vue";
 import IconFont from "@/components/IconFont.vue";
 import MDContent from "@/components/MDContent.vue";
 
+import {AnchorTitle} from "@/utils/InterFacesUtils";
+
 export default defineComponent({
   name: "ArticleDetail",
   components: {MDContent, IconFont, ArticleHeader},
@@ -67,10 +55,42 @@ export default defineComponent({
     id: String
   },
   data() {
-    return {}
+    return {
+      anchorTitles: [] as Array<AnchorTitle>
+    }
   },
   mounted() {
-    //
+    // 当页面渲染完成的时候 进行anchorTitle的读取
+    this.$nextTick(()=>{
+      const titles = document.getElementsByClassName('maxer-anchor-title');
+      for (let i = 0 ; i < titles.length ; i ++){
+        console.log(`距离顶部的位置${this.getElementTop(titles[i] as HTMLElement)}`)
+        const anchorTitle = {
+          titleName: titles[i].textContent,
+          topOffset: this.getElementTop(titles[i] as HTMLElement) - 71 // 这里需要减去一个头部导航的高度
+        } as AnchorTitle
+        this.anchorTitles.push(anchorTitle);
+      }
+      console.log(this.anchorTitles);
+    })
+  },
+  methods:{
+    // 获取页面元素距离顶部的距离
+    getElementTop(ele: any): number{
+      let eleTop = ele.offsetTop; // 获取元素距离相对定位的父元素的top
+      ele = ele.offsetParent
+      while (ele !== null){
+        eleTop += ele.offsetTop;
+        ele = ele.offsetParent;
+      }
+      return eleTop;
+    },
+    goToTop(top: number){
+      window.scrollTo({
+        top: top,
+        behavior: 'smooth'
+      });
+    }
   }
 })
 </script>
@@ -79,7 +99,6 @@ export default defineComponent({
 .maxer-article-container {
   flex: 1;
   border-radius: 5px;
-  min-height: 900px;
   padding: 15px;
   background-color: #e9e9e9;
 }
