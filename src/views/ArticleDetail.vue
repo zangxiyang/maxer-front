@@ -17,7 +17,10 @@
                   <span>目录</span>
                 </div>
                 <div class="toc-content">
-                  <div class="toc-title" v-for="title in anchorTitles" :key="title.titleName" @click="goToTop(title.topOffset)">
+                  <div class="toc-title" v-for="(title,index) in anchorTitles"
+                       :key="title.titleName"
+                       :class="{'active':title.isActive}"
+                       @click="goToTop(title.topOffset,index)">
                     {{title.titleName}}
                   </div>
                 </div>
@@ -62,16 +65,17 @@ export default defineComponent({
   mounted() {
     // 当页面渲染完成的时候 进行anchorTitle的读取
     this.$nextTick(()=>{
-      const titles = document.getElementsByClassName('maxer-anchor-title');
+      const titles = document.getElementsByClassName('md-content')[0].getElementsByClassName('maxer-anchor-title');
       for (let i = 0 ; i < titles.length ; i ++){
-        console.log(`距离顶部的位置${this.getElementTop(titles[i] as HTMLElement)}`)
         const anchorTitle = {
           titleName: titles[i].textContent,
-          topOffset: this.getElementTop(titles[i] as HTMLElement) - 71 // 这里需要减去一个头部导航的高度
+          topOffset: this.getElementTop(titles[i] as HTMLElement) - 71, // 这里需要减去一个头部导航的高度
+          isActive: false
         } as AnchorTitle
         this.anchorTitles.push(anchorTitle);
       }
-      console.log(this.anchorTitles);
+      // 加入滚动监听
+      document.addEventListener('scroll',this.scrollListener)
     })
   },
   methods:{
@@ -85,11 +89,41 @@ export default defineComponent({
       }
       return eleTop;
     },
-    goToTop(top: number){
+    goToTop(top: number, index: number){
+      // 首先移除滚动监听
+      document.removeEventListener('scroll',this.scrollListener);
+      // 全部置空
       window.scrollTo({
         top: top,
         behavior: 'smooth'
       });
+      this.anchorTitles.forEach((value)=>{
+        value.isActive = false;
+      });
+      this.anchorTitles[index].isActive = true;
+      // 延迟添加滚动监听 [需要等待平滑滚动完成后]
+      setTimeout(()=>{
+        document.addEventListener('scroll',this.scrollListener);
+      },1000);
+
+    },
+    scrollListener(){
+      const top = document.body.scrollTop || document.documentElement.scrollTop;
+      // 全部置空
+      this.anchorTitles.forEach((value)=>{
+        value.isActive = false;
+      })
+      for (let i = 0 ; i < this.anchorTitles.length; i ++){
+        if (i === this.anchorTitles.length - 1 && top > this.anchorTitles[i].topOffset){
+          // 当前为最后一个
+          this.anchorTitles[i].isActive = true;
+          break;
+        }
+        if (top > this.anchorTitles[i].topOffset && top < this.anchorTitles[i+1].topOffset){
+          this.anchorTitles[i].isActive = true;
+          break;
+        }
+      }
     }
   }
 })
@@ -137,6 +171,7 @@ export default defineComponent({
         }
         &.active{
           border-left: 2px solid #8a8a8a;
+          color: #4c4c4c;
         }
       }
     }

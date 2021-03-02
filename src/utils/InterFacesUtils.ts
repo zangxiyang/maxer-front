@@ -9,4 +9,5 @@
 export interface AnchorTitle{
     titleName: string;  // 标题名称
     topOffset: number;  // 顶部距离
+    isActive: boolean;  // 是否处于激活状态
 }
