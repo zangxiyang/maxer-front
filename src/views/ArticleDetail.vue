@@ -32,7 +32,10 @@
       </el-row>
     </div>
   </div>
-  <div style="height: 900px">评论容器</div>
+  <div class="maxer-container mt-20">
+    <comment-view/>
+  </div>
+
 </template>
 
 <script lang="ts">
@@ -50,10 +53,11 @@ import IconFont from "@/components/IconFont.vue";
 import MDContent from "@/components/MDContent.vue";
 
 import {AnchorTitle} from "@/utils/InterFacesUtils";
+import CommentView from "@/components/Comment/CommentView.vue";
 
 export default defineComponent({
   name: "ArticleDetail",
-  components: {MDContent, IconFont, ArticleHeader},
+  components: {CommentView, MDContent, IconFont, ArticleHeader},
   props: {
     id: String
   },
