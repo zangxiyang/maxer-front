@@ -29,7 +29,7 @@
               </div>
             </el-col>
           </el-row>
-          <button class="maxer-border-button large">
+          <button class="maxer-border-button large mt-10">
             <icon-font name="iconziyuan" right="5px"/>
             <span>发布</span>
           </button>
