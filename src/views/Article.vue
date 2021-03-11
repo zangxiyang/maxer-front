@@ -14,7 +14,9 @@
       <article-item title="测试标题 英文 「English SpringBoot」 Emoji 🚻 🤩" tag="标签" category="分类" date="一周前" :comment="10"
                     :hot="256" :words="3000"
                     image-url="https://blog.monsterx.cn/assets/static/new-start.3778461.52df37dc915451de3e056b5f7a1c980b.png"
-                    desc="描述测试，可以自定义"/>
+                    desc="描述测试，可以自定义"
+                    @click="gotoArticleDetail"
+      />
 
       <article-item is-skeleton v-if="loading"/>
       <div class="mt-20">
@@ -48,6 +50,9 @@ export default defineComponent({
     loadMore() {
       this.loading = true;
       setTimeout(() => this.loading = false, 3000);
+    },
+    gotoArticleDetail(): void{
+      this.$router.push("/article/1")
     }
   }
 })

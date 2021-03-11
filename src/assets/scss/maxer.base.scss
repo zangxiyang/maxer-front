@@ -129,6 +129,10 @@
     border-color: #fff;
     border-width: 1px;
   }
+  &.large{
+    padding: 6px 13px;
+    font-size: 15px;
+  }
 }
 .maxer-main-container{
   padding: 24px;
@@ -148,3 +152,53 @@
   }
 }
 
+/* maxer input style */
+.maxer-input{
+  padding: 18px;
+  border-radius: 5px;
+  box-sizing: border-box;
+  margin: 10px 0;
+  background-color: #ffffff;
+  border-width: 2px;
+  border-color: #ccc;
+  transition: all .3s ease;
+  -webkit-transition: all .3s ease;
+  box-shadow: none;
+  outline: none;
+  border-style: solid;
+  &:hover{
+    border-color: #505050;
+    box-shadow: #cdcdcd 0 0 8px;
+  }
+  &:focus{
+    border-color: #505050;
+    box-shadow: #cdcdcd 0 0 8px;
+    outline: none;
+  }
+  &.small{
+    margin: 6px 0;
+    padding: 6px 9px;
+    font-size: 15px;
+    line-height: 15px;
+  }
+  &.auto{
+    width: 100%;
+  }
+}
+
+.maxer-require{
+  &:after{
+    content: '(必填)';
+    color: #795548;
+    font-size: 15px;
+    margin-left: 5px;
+  }
+}
+.maxer-un-require{
+  &:after{
+    content: '(可选)';
+    color: #795548;
+    font-size: 15px;
+    margin-left: 5px;
+  }
+}

@@ -2,7 +2,10 @@
   <el-row type="flex" :gutter="10">
     <el-col :lg="19">
       <div class="maxer-comment" style="min-height: 300px;">
-        评论组件视图
+        <!--发布评论-->
+        <comment-to-write/>
+        <!--评论列表-->
+        <comment-list/>
       </div>
     </el-col>
   </el-row>
@@ -19,9 +22,12 @@
 */
 
 import {defineComponent} from 'vue';
+import CommentToWrite from "@/components/Comment/CommentToWrite.vue";
+import CommentList from "@/components/Comment/CommentList.vue";
 
 export default defineComponent({
   name: "CommentView",
+  components: {CommentList, CommentToWrite},
   data() {
     return {}
   }
