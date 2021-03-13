@@ -27,6 +27,7 @@
         </div>
       </div>
       <div class="content">
+        <span class="header none-select">回复@测试用户:&nbsp;</span>
         又看了一遍 配合着bgm体验太好了 看哭了 感觉又找回了当时刚玩时候的感动 最近被海灯节的任务整的很难受 都没怎么玩了 感谢您让我找回了刚入坑时的感觉 谢谢你
       </div>
     </div>
@@ -63,6 +64,10 @@ export default defineComponent({
 .content {
   padding: 10px 0;
   font-size: 14px;
+  .header{
+    letter-spacing: 1px;
+    color: #8a8a8a;
+  }
 }
 
 .avatar {

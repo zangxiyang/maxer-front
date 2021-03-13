@@ -36,6 +36,7 @@
   <div class="maxer-comment-reply-container">
     <!-- 回复容器 -->
     <comment-reply-item/>
+    <comment-reply-item/>
   </div>
 </template>
 
