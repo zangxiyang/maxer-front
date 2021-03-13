@@ -21,7 +21,7 @@
  * 版本: V1
 */
 
-import {defineComponent} from 'vue';
+import {defineComponent, ref} from 'vue';
 import CommentToWrite from "@/components/Comment/CommentToWrite.vue";
 import CommentList from "@/components/Comment/CommentList.vue";
 
@@ -29,7 +29,16 @@ export default defineComponent({
   name: "CommentView",
   components: {CommentList, CommentToWrite},
   data() {
-    return {}
+    return {
+
+    }
+  },
+  provide(){
+    return{
+      commentReplyStatus: ref(false),              // 当前回复的状态
+      commentReplyUserName: ref('测试姓名'),        // 当前回复的用户名
+
+    }
   }
 })
 </script>

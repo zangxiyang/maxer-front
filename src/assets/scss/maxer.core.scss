@@ -24,6 +24,15 @@ a{
   color: #fff;
   background: #c68556;
 }
+input:-webkit-autofill{
+  -webkit-text-fill-color: inherit;
+  -webkit-box-shadow: 0 0 0 1000px white inset;
+  &:hover,&:active,&:focus{
+    -webkit-box-shadow: 0 0 0 1000px white inset;
+  }
+}
+
+
 // 覆写yue
 .yue ::selection {
   color: #fff;
