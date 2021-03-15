@@ -6,6 +6,13 @@
         <comment-to-write/>
         <!--评论列表-->
         <comment-list/>
+        <div class="maxer-pagination">
+          <el-pagination
+              background
+              layout="prev, pager, next"
+              :total="1000">
+          </el-pagination>
+        </div>
       </div>
     </el-col>
   </el-row>
@@ -50,5 +57,50 @@ export default defineComponent({
     margin-top: 20px;
     margin-bottom: 80px;
     box-sizing: border-box;
+    .maxer-pagination{
+      padding: 20px 30px;
+      ::v-deep{
+        .el-pagination{
+          .btn-prev,.btn-next{
+            background-color: transparent;
+            transition: background-color .3s linear, color .3s linear;
+            -webkit-transition: background-color .3s linear, color .3s linear;
+            &:hover{
+              background-color: #505050;
+              color: #eee;
+            }
+            &[disabled]{
+              background-color: #f4f4f5;
+              color: #606266;
+              
+            }
+          }
+          .el-pager li:not(.disabled).active{
+            background-color: #505050;
+            color: #eee;
+          }
+          .el-pager{
+            .number{
+              background-color: transparent;
+              transition: background-color .3s linear;
+              -webkit-transition: background-color .3s linear;
+              &:hover{
+                background-color: #f4f4f5;
+                color: #606266;
+              }
+            }
+            li{
+              background-color: transparent;
+              transition: background-color .3s linear;
+              -webkit-transition: background-color .3s linear;
+              &:hover{
+                background-color: #f4f4f5;
+                color: #606266;
+              }
+            }
+          }
+        }
+      }
+    }
   }
 </style>
