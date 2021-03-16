@@ -1,7 +1,10 @@
 <template>
   <maxer-header title="留言板" static/>
   <div class="maxer-container">
-    测试
+    <div class="maxer-comment-container">
+      <comment-list message-board/>
+      <comment-content/>
+    </div>
   </div>
 </template>
 
@@ -15,16 +18,29 @@
  */
 import {defineComponent} from 'vue';
 import MaxerHeader from "@/components/MaxerHeader.vue";
+import CommentList from "@/components/Comment/CommentList.vue";
+import CommentContent from "@/components/Comment/CommentContent.vue";
 
 export default defineComponent({
   name: "Comment",
-  components: {MaxerHeader},
+  components: {CommentContent, CommentList, MaxerHeader},
+  provide(){
+    return{
+      commentReplyStatus: false,
+      commentReplyUserName: '测试用户'
+    }
+  },
   data() {
     return {}
   }
 })
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+.maxer-comment-container{
+  margin: 20px 0;
+  background-color: #fff;
+  border-radius: 10px;
+  padding-bottom: 20px;
+}
 </style>
