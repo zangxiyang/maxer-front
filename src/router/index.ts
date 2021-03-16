@@ -87,10 +87,13 @@ const router = createRouter({
 })
 router.beforeEach((to, from, next) => {
     if (to.path !== from.path) nProgress.start();
-
     next();
 })
 router.afterEach((to, from) => {
     if (to.path !== from.path) setTimeout(() => nProgress.done(), 300);
+    // 保证切换路由时，滚动条在顶部
+    window.scrollTo({
+        top: 0
+    });
 })
 export default router

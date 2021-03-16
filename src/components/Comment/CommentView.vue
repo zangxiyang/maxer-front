@@ -72,7 +72,7 @@ export default defineComponent({
             &[disabled]{
               background-color: #f4f4f5;
               color: #606266;
-              
+
             }
           }
           .el-pager li:not(.disabled).active{
