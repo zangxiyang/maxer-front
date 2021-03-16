@@ -23,7 +23,7 @@ export class Methods {
 }
 
 // axios 默认配置
-axios.defaults.timeout = 5000;
+axios.defaults.timeout = 8000;
 axios.defaults.withCredentials = true;
 axios.defaults.xsrfHeaderName = xsrfHeaderName;
 axios.defaults.xsrfCookieName = xsrfHeaderName;

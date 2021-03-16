@@ -6,7 +6,7 @@
         <comment-to-write/>
         <!--评论列表-->
         <comment-list/>
-        <div class="maxer-pagination">
+        <div class="maxer-pagination f-jc-c">
           <el-pagination
               background
               layout="prev, pager, next"

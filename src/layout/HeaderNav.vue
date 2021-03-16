@@ -51,7 +51,7 @@
                         :nav-index="4"
                         @click="navItemOnClick">
                 <nav-more-item title="友情链接"/>
-                <nav-more-item title="留言板"/>
+                <nav-more-item title="留言板" route="/comment"/>
                 <nav-more-item title="关于"/>
               </nav-item>
             </div>
@@ -322,7 +322,7 @@ export default defineComponent({
     // 获取Route meta 信息来确定指针的位置
     const router = useRouter();
     router.beforeEach(async (to, from, next) => {
-      this.indicator.index = to.name as string;
+      this.indicator.index = to.meta.indicator as string;
       // 更改路由的时候立即通知指示器更新
       if (this.navItemsHash.get(this.indicator.index) === undefined){
         // 当不在hash内时，取消显示指示器

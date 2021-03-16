@@ -16,27 +16,42 @@ const routes: Array<RouteRecordRaw> = [
                  path: '/home',
                  alias: '/',
                  name: 'Home',
-                 component: Home
+                 component: Home,
+                 meta:{
+                     indicator: 'Home'
+                 }
              },
              {
                  path: '/category',
                  name: 'Category',
-                 component: About
+                 component: About,
+                 meta:{
+                     indicator: 'Category'
+                 }
              },
              {
                  path: '/article',
                  name: 'Article',
-                 component: () => import('../views/Article.vue')
+                 component: () => import('../views/Article.vue'),
+                 meta:{
+                     indicator: 'Article'
+                 }
              },
              {
                  path: '/wechat',
                  name: 'Wechat',
-                 component: () => import('../views/WeChat.vue')
+                 component: () => import('../views/WeChat.vue'),
+                 meta:{
+                     indicator: 'Wechat'
+                 }
              },
              {
                  path: '/more',
                  name: 'More',
-                 component: () => import('../views/More.vue')
+                 component: () => import('../views/More.vue'),
+                 meta:{
+                     indicator: 'More'
+                 }
              }
          ]
     },
@@ -46,7 +61,15 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('../views/CategoryList.vue'),
         props: true,
         meta:{
-            keepAlive: true
+            indicator: 'Category'
+        }
+    },
+    {
+        path: '/comment',
+        name: 'Comment',
+        component: ()=> import('../views/Comment.vue'),
+        meta:{
+            indicator: 'More'
         }
     },
     {
@@ -55,7 +78,7 @@ const routes: Array<RouteRecordRaw> = [
         component: ()=> import('../views/ArticleDetail.vue'),
         props: true,
         meta:{
-            keepAlive: true
+            indicator: 'Article'
         }
     },
     {

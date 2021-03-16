@@ -4,7 +4,6 @@
     <keep-alive :include="vuexCacheView">
       <component :is="Component"/>
     </keep-alive>
-    <!--<component :is="Component"/>-->
   </router-view>
 </template>
 
