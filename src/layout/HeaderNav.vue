@@ -50,7 +50,7 @@
                         is-more
                         :nav-index="4"
                         @click="navItemOnClick">
-                <nav-more-item title="友情链接"/>
+                <nav-more-item title="友情链接" route="/links"/>
                 <nav-more-item title="留言板" route="/comment"/>
                 <nav-more-item title="关于"/>
               </nav-item>

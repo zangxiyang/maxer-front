@@ -73,6 +73,14 @@ const routes: Array<RouteRecordRaw> = [
         }
     },
     {
+        path: '/links',
+        name: 'Link',
+        component: ()=> import('../views/Links.vue'),
+        meta:{
+            indicator: 'More'
+        }
+    },
+    {
         path: '/article/:id',
         name: 'ArticleDetail',
         component: ()=> import('../views/ArticleDetail.vue'),

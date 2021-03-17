@@ -1,5 +1,5 @@
 <template>
-  <el-row type="flex" :gutter="10">
+  <el-row type="flex" :gutter="10" v-if="!noneCol">
     <el-col :lg="19">
       <div class="maxer-comment" style="min-height: 300px;">
         <!--发布评论-->
@@ -16,6 +16,21 @@
       </div>
     </el-col>
   </el-row>
+  <template v-else>
+    <div class="maxer-comment" style="min-height: 300px;">
+      <!--发布评论-->
+      <comment-to-write/>
+      <!--评论列表-->
+      <comment-list/>
+      <div class="maxer-pagination f-jc-c">
+        <el-pagination
+            background
+            layout="prev, pager, next"
+            :total="1000">
+        </el-pagination>
+      </div>
+    </div>
+  </template>
 
 </template>
 
@@ -35,6 +50,12 @@ import CommentList from "@/components/Comment/CommentList.vue";
 export default defineComponent({
   name: "CommentView",
   components: {CommentList, CommentToWrite},
+  props:{
+    noneCol: {
+      type: Boolean,
+      default: false
+    }
+  },
   data() {
     return {
 
