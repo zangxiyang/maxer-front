@@ -38,6 +38,7 @@
       </div>
     </div>
     <comment-view none-col/>
+    <comment-list/>
   </div>
 </template>
 
