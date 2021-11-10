@@ -10,4 +10,4 @@ For example, to overwrite the theme color:
 /* icon font path, required */
 $--font-path: '~element-plus/lib/theme-chalk/fonts';
 
-@import "~element-plus/packages/theme-chalk/src/index";
+@import "~element-plus/theme-chalk/index.css";

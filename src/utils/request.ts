@@ -61,7 +61,7 @@ axios.interceptors.response.use(resp=>{
         title: "服务器异常",
         message: error.message,
         duration: 10000
-    })
+    });
     return Promise.reject(error);
 })
 
