@@ -257,7 +257,7 @@ export default defineComponent({
   z-index: 99;
 
   &.maxer-pagination-bullet-active {
-    background-color: rgb(17, 17, 17, .5) !important;
+    background-color: rgba(17, 17, 17, .5) !important;
 
   }
 
