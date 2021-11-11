@@ -52,7 +52,8 @@ const routes: Array<RouteRecordRaw> = [
                  meta:{
                      indicator: 'More'
                  }
-             }
+             },
+
          ]
     },
     {
@@ -68,6 +69,14 @@ const routes: Array<RouteRecordRaw> = [
         path: '/comment',
         name: 'Comment',
         component: ()=> import('../views/Comment.vue'),
+        meta:{
+            indicator: 'More'
+        }
+    },
+    {
+        path: '/donation',
+        name: 'Donation',
+        component: () => import('../views/Donation.vue'),
         meta:{
             indicator: 'More'
         }

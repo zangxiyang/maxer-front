@@ -59,6 +59,12 @@
 .mr-10{
   margin-right: 10px;
 }
+.mr-20{
+  margin-right: 20px;
+}
+.mr-40{
+  margin-right: 40px;
+}
 .mt-20{
   margin-top: 20px;
 }
@@ -92,7 +98,15 @@
 .cur-p{
   cursor: pointer;
 }
-
+.w-full{
+  width: 100%;
+}
+.p-relative{
+  position: relative;
+}
+.p-absolute{
+  position: absolute;
+}
 .none-select{
   cursor: default;
   user-select: none;

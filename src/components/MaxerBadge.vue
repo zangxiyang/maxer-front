@@ -2,6 +2,7 @@
   <el-tooltip effect="light" :content="content" placement="top" v-if="isPopover">
     <span
         class="maxer-badge none-select"
+        :class="{'small': size==='small'}"
         :style="[{marginLeft: `${left ? left:0}px`},
         {marginRight: `${right? right:0}px`},
         {backgroundColor: themeColor}]">
@@ -12,6 +13,7 @@
   <span
       v-else
       class="maxer-badge none-select"
+      :class="{'small': size==='small'}"
       :style="[{marginLeft: `${left ? left:0}px`},
         {marginRight: `${right? right:0}px`},
         {backgroundColor: themeColor}]">
@@ -42,6 +44,7 @@ export default defineComponent({
     },
     icon: String,
     iconSize: Number,
+    size: String,
     left: Number,
     right: Number,
     isPopover: {
@@ -90,5 +93,10 @@ export default defineComponent({
   color: #fff;
   border-radius: 5px;
 
+  &.small{
+    padding: 1px 3px;
+    border-radius: 3px;
+    font-size: 12px;
+  }
 }
 </style>
