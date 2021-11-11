@@ -1,8 +1,7 @@
 <template>
   <div class="payment mt-10" @click="updateVal">
     <label class="sp-radio flex f-jc-c"
-           :class="{'checked':modelValue===value,'disabled':disabled}"
-           :disabled="disabled">
+           :class="{'checked':modelValue===value,'disabled':disabled}">
       <label class="sp-payment-radio">
         <input type="hidden" ref="radio" :value="value">
       </label>
@@ -25,7 +24,7 @@
 
 <script setup lang="ts">
 
-import {defineEmits, ref, defineProps, onMounted} from "vue";
+import {defineEmits, ref, defineProps} from "vue";
 import IconFont from "@/components/IconFont.vue";
 import MaxerBadge from "@/components/MaxerBadge.vue";
 
@@ -33,7 +32,7 @@ const props = defineProps<{
   modelValue: string,
   value: string,
   title: string,
-  showBadge: boolean, // 是否展示推荐徽标
+  showBadge?: boolean, // 是否展示推荐徽标
   disabled?: boolean
   isIcon?: boolean
   iconFontName?: string,
@@ -49,6 +48,8 @@ const updateVal = () => {
     emit('update:modelValue', radio.value.value);
   }
 }
+console.log('是否禁用：' +props.disabled)
+console.log('是否展示徽标' + props.showBadge)
 </script>
 
 <style lang="scss" scoped>

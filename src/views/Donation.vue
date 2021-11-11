@@ -17,24 +17,22 @@
           <payment-item
               class="mr-40"
               v-model="payment"
-              :is-icon=true
+              :is-icon="true"
               icon-font-name="iconzhifu-zhifubao"
               value="alipay"
               :checked="true"
               title="支付宝"
-              show-badge
-              :size="40">
-            <div>测试</div>
-          </payment-item>
+              :show-badge="true"
+              :disabled="false"
+              size="40" />
           <payment-item
               v-model="payment"
-              :is-icon=true
+              :is-icon="true"
               icon-font-name="iconweixinzhifu1"
               value="wechat"
-              :size="30"
+              size="30"
               title="微信支付"
-              disabled
-          />
+              :disabled="true"/>
         </div>
         <div class="form mt-20">
           <div class="item">
