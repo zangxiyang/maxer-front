@@ -14,7 +14,10 @@
         {{ title }}
         <template v-if="showBadge">
           <!--展示推荐标志-->
-          <maxer-badge title="推荐" size="small" class="badge"></maxer-badge>
+          <maxer-badge
+              title="推荐"
+              size="small"
+              class="badge"/>
         </template>
       </div>
     </div>
@@ -24,11 +27,11 @@
 
 <script setup lang="ts">
 
-import {defineEmits, ref, defineProps} from "vue";
+import {defineEmits, ref, defineProps, withDefaults} from "vue";
 import IconFont from "@/components/IconFont.vue";
 import MaxerBadge from "@/components/MaxerBadge.vue";
 
-const props = defineProps<{
+interface IProps {
   modelValue: string,
   value: string,
   title: string,
@@ -37,7 +40,14 @@ const props = defineProps<{
   isIcon?: boolean
   iconFontName?: string,
   size?: string
-}>();
+}
+
+const props = withDefaults(defineProps<IProps>(),{
+  isIcon: false,
+  disabled: false,
+  showBadge: false
+})
+
 const emit = defineEmits(['update:modelValue']);
 
 const radio = ref();
@@ -48,7 +58,7 @@ const updateVal = () => {
     emit('update:modelValue', radio.value.value);
   }
 }
-console.log('是否禁用：' +props.disabled)
+console.log('是否禁用：' + props.disabled)
 console.log('是否展示徽标' + props.showBadge)
 </script>
 
@@ -96,7 +106,7 @@ console.log('是否展示徽标' + props.showBadge)
       color: #8a8a8a;
     }
 
-    .badge{
+    .badge {
       cursor: pointer;
       position: absolute;
       top: 3px;
