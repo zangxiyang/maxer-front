@@ -22,7 +22,7 @@
               value="alipay"
               title="支付宝"
               show-badge
-              size="40" />
+              size="40"/>
           <payment-item
               v-model="payment"
               is-icon
@@ -44,7 +44,8 @@
           <div class="item mt-20">
             <div class="item-title">捐助信息</div>
             <el-input class="mt-10" placeholder="您的名称(必填)" v-model="donateName" clearable maxlength="10"/>
-            <el-input class="mt-10" placeholder="捐助留言(选填)" v-model="msg" clearable maxlength="255" type="textarea" :rows="3"
+            <el-input class="mt-10" placeholder="捐助留言(选填)" v-model="msg" clearable maxlength="255" type="textarea"
+                      :rows="3"
                       show-word-limit/>
           </div>
           <div class="item mt-20">
@@ -57,7 +58,7 @@
             </div>
           </div>
           <div class="item mt-20 mb-20">
-            <el-button type="primary">去支付</el-button>
+            <el-button type="primary" @click="onPayButtonClick">去支付</el-button>
           </div>
         </div>
       </div>
@@ -75,6 +76,8 @@
 import MaxerHeader from "@/components/MaxerHeader.vue";
 import {ref} from "vue";
 import PaymentItem from "@/components/Donation/PaymentItem.vue";
+import {useRouter} from "vue-router";
+import {IDonationProps} from "@/views/Donation/IDonationProps";
 
 
 const amount = ref('5.00');
@@ -103,10 +106,23 @@ const countOptions = [
 const donateName = ref();
 // 捐助留言
 const msg = ref();
+
+
+const router = useRouter();
+// 支付按钮点击事件
+const onPayButtonClick = () => {
+  const params = {
+    user: donateName.value,
+    amount: amount.value,
+    msg: msg.value
+  } as IDonationProps
+
+  router.push({name: 'DonationResult', params})
+}
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/scss/maxer.variables";
+@import "../../assets/scss/maxer.variables";
 
 .info-box {
   width: 560px;

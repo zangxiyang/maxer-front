@@ -74,7 +74,7 @@ axios.interceptors.response.use(resp=>{
  * @param method 请求方式
  * @param params 请求参数
  */
-export async function request<T>(url: string, method: string, params?: object): Promise<AxiosResponse<T>> {
+export async function request<T>(url: string, method: string, params?: any): Promise<AxiosResponse<T>> {
     switch (method) {
         case Methods.GET:
             return axios.get(url, {params})
