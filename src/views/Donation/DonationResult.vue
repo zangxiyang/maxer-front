@@ -63,7 +63,7 @@
 import {useRoute} from "vue-router";
 import {IDonationProps} from "@/views/Donation/IDonationProps";
 import MaxerHeader from "@/components/MaxerHeader.vue";
-import {checkDonationOrderStatus} from "@/api/DonationService";
+import {checkDonationOrderStatus, createDonationOrder} from "@/api/DonationService";
 import QrcodeVue from "qrcode.vue";
 import {ref, watch} from "vue";
 import {OrderConstant} from "@/utils/Constant";
@@ -71,8 +71,14 @@ import {OrderConstant} from "@/utils/Constant";
 const route = useRoute();
 
 const params = route.params as unknown as IDonationProps
+console.log(params)
 
-// 当前支付状态
+/**
+ * 轮询订单
+ */
+const checkOrderInterval = ref();
+const checkCount = ref(0);
+const orderStatus = ref(OrderConstant.DONATION_ORDER_STATUS_NO_PAID)
 
 
 // 二维码逻辑
@@ -80,15 +86,19 @@ const qrUrl = ref('');
 const qrLoading = ref(true);  // 二维码加载状态
 const qrIsTimeOut = ref(false)  // 二维码是否已失效
 // 开始进行下单请求
-/*createDonationOrder(params.user, params.amount).then(res => {
+createDonationOrder(params.user, params.amount).then(res => {
   qrUrl.value = res.data.data.qrPayUrl
+  // 填充订单id
+  params.orderId = res.data.data.id;
   // 关闭二维码加载动画
   qrLoading.value = false
   // 开始计算时间
   startCalcTime();
-})*/
-// 关闭二维码加载动画
-qrLoading.value = false
+  // 开始进行轮询检测
+  // 9999次
+  startCheckOrder(9999);
+
+})
 // 支付请求加载特效
 const qrLoadingInfos = ['支付请求飞到外太空了.', '支付请求飞到外太空了..', '支付请求飞到外太空了...',
   '飞船正在带着结果回来.', '飞船正在带着结果回来..', '飞船正在带着结果回来...',
@@ -138,40 +148,41 @@ watch(timeVal,
       timeText.value = `${minutes}:${seconds}`
     })
 
-/**
- * 轮询订单
- */
-const checkOrderInterval = ref();
-const checkCount = ref(0);
-const orderStatus = ref(OrderConstant.DONATION_ORDER_STATUS_FINISH)
+
 
 /**
  * 检查订单状态
  * @param max 轮询最大值
  */
-const checkOrder = (max: number) => {
-  // 轮询超过上限则关闭定时器，并弹出模态框让用户手动选择支付结果
-  if (checkCount.value === max) {
-    //todo 模态框 用户手动确认订单状态
-    // 关闭定时器
-    clearInterval(checkOrderInterval.value)
-    return;
-  }
-  if (orderStatus.value === OrderConstant.DONATION_ORDER_STATUS_FINISH as number) {
-    // 当前订单已被支付
-    // 关闭定时器
-    clearInterval(checkOrderInterval.value)
-    //todo 业务逻辑
-  }
-  // 轮询订单
-  checkDonationOrderStatus(params.orderId).then(res => {
-    // 支付成功则更新当前状态
-    if (res.data.data.isPaid) orderStatus.value = OrderConstant.DONATION_ORDER_STATUS_FINISH
-  })
-  // 记录次数
-  checkCount.value++;
+const startCheckOrder = (max: number) => {
+  const checkOrder = (): void => {
+    // 轮询超过上限则关闭定时器，并弹出模态框让用户手动选择支付结果
+    if (checkCount.value === max) {
+      //todo 模态框 用户手动确认订单状态
+      // 关闭定时器
+      clearInterval(checkOrderInterval.value)
+      return;
+    }
+    if (orderStatus.value === OrderConstant.DONATION_ORDER_STATUS_FINISH as number) {
+      // 当前订单已被支付
+      // 关闭定时器
+      clearInterval(checkOrderInterval.value)
+      return;
+    }
+    // 轮询订单
+    checkDonationOrderStatus(params.orderId).then(res => {
+      // 支付成功则更新当前状态
+      if (res.data.data.isPaid) orderStatus.value = OrderConstant.DONATION_ORDER_STATUS_FINISH
+    })
+    // 记录次数
+    checkCount.value++;
 
+  }
+  // 开始轮询
+  checkOrderInterval.value = setInterval(checkOrder,2000);
 }
+
+
 
 
 </script>

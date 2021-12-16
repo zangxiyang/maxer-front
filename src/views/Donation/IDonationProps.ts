@@ -9,6 +9,6 @@
 export interface IDonationProps extends Record<string, any>{
     orderId: string,
     user: string,
-    amount: number | string
+    amount: string
     msg?: string,
 }

@@ -111,9 +111,10 @@ const msg = ref();
 const router = useRouter();
 // 支付按钮点击事件
 const onPayButtonClick = () => {
+  // 构建参数对象
   const params = {
     user: donateName.value,
-    amount: amount.value,
+    amount: '0.01',
     msg: msg.value
   } as IDonationProps
   router.push({name: 'DonationResult', params})
