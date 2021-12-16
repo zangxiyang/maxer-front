@@ -2,40 +2,58 @@
   <maxer-header title="☕️ 捐助本站" static/>
   <div class="maxer-container flex f-jc-c mt-20 mb-20">
     <div class="donation-container">
-      <div class="qr flex f-jc-c">
-        <template v-if="qrLoading">
-          <img src="@/assets/img/battery-ab.gif" alt="加载中" class="qr-loading">
-        </template>
-        <template v-else>
-          <div class="qr-code" :class="{'time-out': qrIsTimeOut}">
-            <div class="time-out-container flex al-c f-jc-c none-select" v-if="qrIsTimeOut">
-              二维码已失效
+      <template v-if="orderStatus === OrderConstant.DONATION_ORDER_STATUS_NO_PAID">
+        <!-- 当前订单处于未支付状态 -->
+        <div class="qr flex f-jc-c">
+          <template v-if="qrLoading">
+            <img src="@/assets/img/battery-ab.gif" alt="加载中" class="qr-loading">
+          </template>
+          <template v-else>
+            <div class="qr-code" :class="{'time-out': qrIsTimeOut}">
+              <div class="time-out-container flex al-c f-jc-c none-select" v-if="qrIsTimeOut">
+                二维码已失效
+              </div>
+              <qrcode-vue
+                  :value="qrUrl"
+                  :size="230"
+                  :margin="2"/>
             </div>
-            <qrcode-vue
-                :value="qrUrl"
-                :size="230"
-                :margin="2"
-            />
-          </div>
-        </template>
-      </div>
-      <div class="qr-loading-info flex al-c f-jc-c mt-10" v-if="qrLoading">
-        <span>{{qrLoadingInfoText}}</span>
-      </div>
-      <div class="info flex f-jc-c mt-20">
-        <template v-if="timeVal === 0">
-          <el-alert title="注意啦"
-                    style="width: 80%"
-                    description='当前二维码已失效，请重新请求！'
-                    :closable="false"
-                    type="error" effect="dark" show-icon/>
-        </template>
-        <template v-else>
+          </template>
+        </div>
+        <div class="qr-loading-info flex al-c f-jc-c mt-10" v-if="qrLoading">
+          <span>{{ qrLoadingInfoText }}</span>
+        </div>
+        <div class="info flex f-jc-c mt-20">
+          <template v-if="timeVal === 0">
+            <el-alert title="注意啦"
+                      style="width: 80%"
+                      description='当前二维码已失效，请重新请求！'
+                      :closable="false"
+                      type="error" effect="dark" show-icon/>
+          </template>
+          <template v-else>
           <span v-show="!qrLoading">
             请在「<span style="color: #dc1616">{{ timeText }}</span>」时间内使用<span style="color: #1d7fe6">支付宝</span>进行支付
           </span>
-        </template>
-      </div>
+          </template>
+        </div>
+      </template>
+      <template v-else-if="orderStatus === OrderConstant.DONATION_ORDER_STATUS_FINISH">
+        <!-- 当前订单完成支付 -->
+        <el-result
+            icon="success"
+            title="捐助成功"
+            sub-title="感谢您的捐助，每一笔捐助本站都会物尽其用！"
+        >
+          <template #extra>
+            <el-button type="primary" size="small" @click="$router.push('/')">回到首页</el-button>
+          </template>
+        </el-result>
+      </template>
+      <template v-else-if="orderStatus === OrderConstant.DONATION_ORDER_STATUS_TIMEOUT">
+        <!-- 当前订单支付超时 -->
+        TODO 支付超时
+      </template>
     </div>
   </div>
 
@@ -54,6 +72,8 @@ const route = useRoute();
 
 const params = route.params as unknown as IDonationProps
 
+// 当前支付状态
+
 
 // 二维码逻辑
 const qrUrl = ref('');
@@ -68,13 +88,13 @@ const qrIsTimeOut = ref(false)  // 二维码是否已失效
   startCalcTime();
 })*/
 // 关闭二维码加载动画
-qrLoading.value = true
+qrLoading.value = false
 // 支付请求加载特效
-const qrLoadingInfos = ['支付请求飞到外太空了.','支付请求飞到外太空了..','支付请求飞到外太空了...',
-  '飞船正在带着结果回来.','飞船正在带着结果回来..','飞船正在带着结果回来...',
-  '支付请求遇到外星人了.','支付请求遇到外星人了..','支付请求遇到外星人了...',
+const qrLoadingInfos = ['支付请求飞到外太空了.', '支付请求飞到外太空了..', '支付请求飞到外太空了...',
+  '飞船正在带着结果回来.', '飞船正在带着结果回来..', '飞船正在带着结果回来...',
+  '支付请求遇到外星人了.', '支付请求遇到外星人了..', '支付请求遇到外星人了...',
   '快看~~UFO.', '快看~~UFO..', '快看~~UFO...']
-const qrLoadingInfoText = ref('')
+const qrLoadingInfoText = ref('支付请求飞到外太空了')
 let textIndex = 0;
 const qrLoadingInterval = setInterval(() => {
   if (textIndex === qrLoadingInfos.length - 1) textIndex = 0;
@@ -88,7 +108,6 @@ watch(qrLoading, (val) => {
     return;
   }
 })
-
 
 
 // 十分钟倒计时
@@ -124,7 +143,7 @@ watch(timeVal,
  */
 const checkOrderInterval = ref();
 const checkCount = ref(0);
-const orderStatus = ref(OrderConstant.DONATION_ORDER_STATUS_NO_PAID)
+const orderStatus = ref(OrderConstant.DONATION_ORDER_STATUS_FINISH)
 
 /**
  * 检查订单状态
