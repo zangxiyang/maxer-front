@@ -20,6 +20,11 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+      # 指定node版本
+      - name: '指定Node版本'
+        uses: actions/setup-node@v2.5.0
+        with:
+          node-version: '14'
       # 下载源码
       - name: Checkout
         uses: actions/checkout@master
