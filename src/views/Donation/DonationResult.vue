@@ -19,6 +19,9 @@
           </div>
         </template>
       </div>
+      <div class="qr-loading-info flex al-c f-jc-c mt-10" v-if="qrLoading">
+        <span>{{qrLoadingInfoText}}</span>
+      </div>
       <div class="info flex f-jc-c mt-20">
         <template v-if="timeVal === 0">
           <el-alert title="注意啦"
@@ -49,7 +52,7 @@ import {OrderConstant} from "@/utils/Constant";
 
 const route = useRoute();
 
-const params = route.params as IDonationProps
+const params = route.params as unknown as IDonationProps
 
 
 // 二维码逻辑
@@ -65,7 +68,28 @@ const qrIsTimeOut = ref(false)  // 二维码是否已失效
   startCalcTime();
 })*/
 // 关闭二维码加载动画
-qrLoading.value = false
+qrLoading.value = true
+// 支付请求加载特效
+const qrLoadingInfos = ['支付请求飞到外太空了.','支付请求飞到外太空了..','支付请求飞到外太空了...',
+  '飞船正在带着结果回来.','飞船正在带着结果回来..','飞船正在带着结果回来...',
+  '支付请求遇到外星人了.','支付请求遇到外星人了..','支付请求遇到外星人了...',
+  '快看~~UFO.', '快看~~UFO..', '快看~~UFO...']
+const qrLoadingInfoText = ref('')
+let textIndex = 0;
+const qrLoadingInterval = setInterval(() => {
+  if (textIndex === qrLoadingInfos.length - 1) textIndex = 0;
+  qrLoadingInfoText.value = qrLoadingInfos[textIndex++];
+}, 500)
+
+watch(qrLoading, (val) => {
+  console.log(`当前状态${val}`)
+  if (!val) {
+    clearInterval(qrLoadingInterval)
+    return;
+  }
+})
+
+
 
 // 十分钟倒计时
 const timeVal = ref(600); // 600s
@@ -81,17 +105,15 @@ const startCalcTime = () => {
 
   }, 1000);
 }
-startCalcTime()
 // 进行监听timeVal的变化
 watch(timeVal,
     (count) => {
       // 如果当前二维码已失效
       if (count === 0) {
         qrIsTimeOut.value = true;
-
       }
-      let minutes = Math.floor(count / 60);
-      let seconds = count - (minutes) * 60;
+      let minutes: number | string = Math.floor(count / 60);
+      let seconds: number | string = count - (minutes) * 60;
       if (seconds < 10) seconds = `0${seconds}`
       if (minutes < 10) minutes = `0${minutes}`
       timeText.value = `${minutes}:${seconds}`
@@ -108,7 +130,7 @@ const orderStatus = ref(OrderConstant.DONATION_ORDER_STATUS_NO_PAID)
  * 检查订单状态
  * @param max 轮询最大值
  */
-const checkOrder = (max) => {
+const checkOrder = (max: number) => {
   // 轮询超过上限则关闭定时器，并弹出模态框让用户手动选择支付结果
   if (checkCount.value === max) {
     //todo 模态框 用户手动确认订单状态

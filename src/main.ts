@@ -30,6 +30,7 @@ declare module '@vue/runtime-core' {
     }
 }
 
+
 const app = createApp(App)
 installElementPlus(app)
 installMaxerStore(app) // 全局混入vuex

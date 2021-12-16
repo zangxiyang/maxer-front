@@ -45,7 +45,7 @@
             <div class="item-title">捐助信息</div>
             <el-input class="mt-10" placeholder="您的名称(必填)" v-model="donateName" clearable maxlength="10"/>
             <el-input class="mt-10" placeholder="捐助留言(选填)" v-model="msg" clearable maxlength="255" type="textarea"
-                      :rows="3"
+                      :rows="7"
                       show-word-limit/>
           </div>
           <div class="item mt-20">
@@ -116,7 +116,6 @@ const onPayButtonClick = () => {
     amount: amount.value,
     msg: msg.value
   } as IDonationProps
-
   router.push({name: 'DonationResult', params})
 }
 </script>

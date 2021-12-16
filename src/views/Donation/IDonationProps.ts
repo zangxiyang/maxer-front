@@ -6,7 +6,7 @@
  * @网站: https://www.imsle.com
  */
 
-export interface IDonationProps {
+export interface IDonationProps extends Record<string, any>{
     orderId: string,
     user: string,
     amount: number | string
