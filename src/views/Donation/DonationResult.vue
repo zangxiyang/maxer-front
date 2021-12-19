@@ -56,19 +56,38 @@
       </template>
     </div>
   </div>
+  <el-dialog
+      v-model="dialogIsPaid"
+      title="确认是否支付"
+      width="30%"
+      :close-on-click-modal="false"
+      :close-on-press-escape="false"
+      :show-close="false"
+
+  >
+    <span>如果陛下<span style="color: red">已经支付</span>了该订单请点击确认</span>
+    <template #footer>
+      <span class="dialog-footer">
+        <el-button @click="dialogIsPaidCancel">朕改主意了~取消订单</el-button>
+        <el-button type="primary" @click="dialogIsPaidCheck">朕已经完成支付</el-button>
+      </span>
+    </template>
+  </el-dialog>
 
 </template>
 
 <script setup lang="ts">
-import {useRoute} from "vue-router";
+import {useRoute, useRouter} from "vue-router";
 import {IDonationProps} from "@/views/Donation/IDonationProps";
 import MaxerHeader from "@/components/MaxerHeader.vue";
 import {checkDonationOrderStatus, createDonationOrder} from "@/api/DonationService";
 import QrcodeVue from "qrcode.vue";
-import {ref, watch} from "vue";
+import {onUnmounted, ref, watch} from "vue";
 import {OrderConstant} from "@/utils/Constant";
+import {ElMessageBox} from "element-plus";
 
 const route = useRoute();
+const router = useRouter();
 
 const params = route.params as unknown as IDonationProps
 console.log(params)
@@ -78,7 +97,31 @@ console.log(params)
  */
 const checkOrderInterval = ref();
 const checkCount = ref(0);
-const orderStatus = ref(OrderConstant.DONATION_ORDER_STATUS_NO_PAID)
+const orderStatus = ref(OrderConstant.DONATION_ORDER_STATUS_NO_PAID);
+const dialogIsPaid = ref(false); // 确认支付模态框
+const dialogIsPaidCancel = ()=>{
+  // 关闭窗口
+  dialogIsPaid.value = false;
+  // 回到首页
+  router.push("/");
+}
+const dialogIsPaidCheck = () => {
+  checkDonationOrderStatus(params.orderId).then(res => {
+    // 支付成功则更新当前状态
+    if (res.data.data.isPaid){
+      // 关闭窗口
+      dialogIsPaid.value = false;
+      // 更改订单状态为完成
+      orderStatus.value = OrderConstant.DONATION_ORDER_STATUS_FINISH
+    } else{
+     // 当前为未支付状态弹出提示
+      ElMessageBox.alert('当前订单没有被支付，请稍后再次确认！', '你不会是想白嫖吧？', {
+        confirmButtonText: '好的',
+        type: 'error'
+      })
+    }
+  })
+}
 
 
 // 二维码逻辑
@@ -94,9 +137,8 @@ createDonationOrder(params.user, params.amount).then(res => {
   qrLoading.value = false
   // 开始计算时间
   startCalcTime();
-  // 开始进行轮询检测
-  // 9999次
-  startCheckOrder(9999);
+  // 开始进行轮询检测 默认进行120次检测（四分钟），之后跳出模态框让用户确定是否被点击
+  startCheckOrder(120);
 
 })
 // 支付请求加载特效
@@ -123,11 +165,12 @@ watch(qrLoading, (val) => {
 // 十分钟倒计时
 const timeVal = ref(600); // 600s
 const timeText = ref('10:00');
+const timeInterval = ref();
 const startCalcTime = () => {
-  const interval = setInterval(() => {
+  timeInterval.value = setInterval(() => {
     if (timeVal.value === 0) {
       // 如果已经经过10分钟则清除定时器
-      clearInterval(interval);
+      clearInterval(timeInterval.value);
       return;
     }
     timeVal.value--;
@@ -149,7 +192,6 @@ watch(timeVal,
     })
 
 
-
 /**
  * 检查订单状态
  * @param max 轮询最大值
@@ -158,9 +200,10 @@ const startCheckOrder = (max: number) => {
   const checkOrder = (): void => {
     // 轮询超过上限则关闭定时器，并弹出模态框让用户手动选择支付结果
     if (checkCount.value === max) {
-      //todo 模态框 用户手动确认订单状态
       // 关闭定时器
       clearInterval(checkOrderInterval.value)
+      // 弹出模态框让用户进行确认是否订单是否已经被支付
+      dialogIsPaid.value = true;
       return;
     }
     if (orderStatus.value === OrderConstant.DONATION_ORDER_STATUS_FINISH as number) {
@@ -179,11 +222,15 @@ const startCheckOrder = (max: number) => {
 
   }
   // 开始轮询
-  checkOrderInterval.value = setInterval(checkOrder,2000);
+  checkOrderInterval.value = setInterval(checkOrder, 2000);
 }
-
-
-
+onUnmounted(()=>{
+  // 关闭所有的定时器
+  clearInterval(checkOrderInterval.value)
+  clearInterval(qrLoadingInterval)
+  clearInterval(checkOrderInterval.value)
+  clearInterval(timeInterval.value)
+})
 
 </script>
 

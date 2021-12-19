@@ -78,6 +78,8 @@ import {ref} from "vue";
 import PaymentItem from "@/components/Donation/PaymentItem.vue";
 import {useRouter} from "vue-router";
 import {IDonationProps} from "@/views/Donation/IDonationProps";
+import {Utils} from "@/utils/utils";
+import {ElNotification} from "element-plus";
 
 
 const amount = ref('5.00');
@@ -103,18 +105,26 @@ const countOptions = [
   }
 ];
 // 捐助者
-const donateName = ref();
+const donateName = ref<string>('');
 // 捐助留言
-const msg = ref();
+const msg = ref<string>('');
 
 
 const router = useRouter();
 // 支付按钮点击事件
 const onPayButtonClick = () => {
+  if (Utils.isEmpty(donateName.value) || Utils.isEmpty(amount.value)){
+    ElNotification({
+      title: '出错啦',
+      message: '捐助人或金额属于必填项，请再次确认后提交',
+      type: 'error',
+    })
+    return false;
+  }
   // 构建参数对象
   const params = {
     user: donateName.value,
-    amount: '0.01',
+    amount: amount.value,
     msg: msg.value
   } as IDonationProps
   router.push({name: 'DonationResult', params})

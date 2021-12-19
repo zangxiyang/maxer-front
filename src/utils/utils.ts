@@ -7,6 +7,8 @@
  */
 
 export class Utils {
-
+    public static isEmpty(obj: string): boolean{
+        return typeof obj == "undefined" || obj == null || obj == "";
+    }
 
 }
