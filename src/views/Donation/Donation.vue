@@ -34,23 +34,53 @@
         </div>
         <div class="form mt-20">
           <div class="item">
-            <div class="item-title">选择您的赞助期限</div>
-            <el-radio border v-model="count" :label="item.val" class="w-full p-relative mt-10"
-                      v-for="item in countOptions" :key="item.title">
-              <span>{{ item.title }}</span>
-              <span class="final-money p-absolute">￥{{ item.val * amount }}</span>
-            </el-radio>
+            <div class="item-title flex al-c">
+              <span>
+                <template v-if="donationMode === 0">
+                  选择您的赞助期限
+                </template>
+                <template v-if="donationMode === 1">
+                  选择您的赞助金额
+                </template>
+              </span>
+              <maxer-button class="ml-10" @click="onButtonChangeMode">切换捐助模式</maxer-button>
+            </div>
+            <template v-if="donationMode=== 0">
+              <!--正常模式-->
+              <el-radio border v-model="count" :label="item.val" class="w-full p-relative mt-10"
+                        v-for="item in countOptions" :key="item.title">
+                <span>{{ item.title }}</span>
+                <span class="final-money p-absolute">￥{{ item.val * amount }}</span>
+              </el-radio>
+            </template>
+            <template v-if="donationMode === 1">
+              <!--自定义金额捐助-->
+              <el-input v-model="money" placeholder="请输入金额" class="mt-10" size="small" type="number">
+                <template #prepend>
+                  <icon-font name="iconcoin-yen" size="20"/>
+                </template>
+                <template #append>
+                  元 / CNY / RMB
+                </template>
+              </el-input>
+            </template>
           </div>
           <div class="item mt-20">
             <div class="item-title">捐助信息</div>
             <el-input class="mt-10" placeholder="您的名称(必填)" v-model="donateName" clearable maxlength="10"/>
+            <el-input class="mt-10" placeholder="绑定手机号(唯一标识捐助者，所有捐助记录会与该手机号绑定，必填)" v-model="phone"/>
             <el-input class="mt-10" placeholder="捐助留言(选填)" v-model="msg" clearable maxlength="255" type="textarea"
                       :rows="7"
                       show-word-limit/>
           </div>
           <div class="item mt-20">
             <div class="item-title">您需要支付</div>
-            <div class="money">￥<span class="amount">{{ count * amount }}</span></div>
+            <div class="money">
+              <span>￥</span>
+              <span class="amount">
+                {{ money }}
+              </span>
+            </div>
             <div class="info">
               <p>1. 请确认支付金额以及赞助期数</p>
               <p>2. 赞助到期后并不会自动续费，如有需求请自行续费</p>
@@ -74,18 +104,43 @@
  * 版本: V1
  */
 import MaxerHeader from "@/components/MaxerHeader.vue";
-import {ref} from "vue";
+import {ref, watch} from "vue";
 import PaymentItem from "@/components/Donation/PaymentItem.vue";
 import {useRouter} from "vue-router";
 import {IDonationProps} from "@/views/Donation/IDonationProps";
 import {Utils} from "@/utils/utils";
 import {ElNotification} from "element-plus";
+import MaxerButton from "@/components/MaxerButton.vue";
+import IconFont from "@/components/IconFont.vue";
 
+// 捐助模式 0-> 标准，通过item选择； 1-> 自定义，通过编辑框自己输入
+const donationMode = ref<number>(1);
 
 const amount = ref('5.00');
 const payment = ref('alipay');
 // 赞助期数
 const count = ref(1);
+// 需要支付金额
+const money = ref<number>(count.value * Number(amount.value))
+watch(count, () => {
+  money.value = count.value * Number(amount.value)
+})
+// 监听捐助模式
+watch(donationMode, value => {
+  if (value === 0) {
+    // 标准模式
+    money.value = count.value * Number(amount.value)
+  }
+})
+// 切换捐助模式
+const onButtonChangeMode = () => {
+  if (donationMode.value === 1) {
+    donationMode.value = 0;
+    return;
+  }
+  donationMode.value++;
+}
+
 const countOptions = [
   {
     title: '1期',
@@ -108,15 +163,34 @@ const countOptions = [
 const donateName = ref<string>('');
 // 捐助留言
 const msg = ref<string>('');
-
+// 手机号
+const phone = ref<string>('');
 
 const router = useRouter();
 // 支付按钮点击事件
 const onPayButtonClick = () => {
-  if (Utils.isEmpty(donateName.value) || Utils.isEmpty(amount.value)){
+  // 检测手机号
+  if (!(/^1[3456789]\d{9}$/.test(phone.value))){
     ElNotification({
       title: '出错啦',
-      message: '捐助人或金额属于必填项，请再次确认后提交',
+      message: '请填写正确的手机号',
+      type: 'error',
+    })
+    return false;
+  }
+  // 检测金额
+  if (money.value <= 0 || money.value > 20000 || Utils.isEmpty(money.value)){
+    ElNotification({
+      title: '出错啦',
+      message: '捐助金额不能大于20000元或不能为负数且不能为空',
+      type: 'error',
+    })
+    return false;
+  }
+  if (Utils.isEmpty(donateName.value) ) {
+    ElNotification({
+      title: '出错啦',
+      message: '捐助人属于必填项',
       type: 'error',
     })
     return false;
@@ -124,7 +198,7 @@ const onPayButtonClick = () => {
   // 构建参数对象
   const params = {
     user: donateName.value,
-    amount: amount.value,
+    amount: String(money.value),
     msg: msg.value
   } as IDonationProps
   router.push({name: 'DonationResult', params})
@@ -196,4 +270,13 @@ const onPayButtonClick = () => {
 }
 
 
+</style>
+<style>
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+  -webkit-appearance: none !important;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
 </style>

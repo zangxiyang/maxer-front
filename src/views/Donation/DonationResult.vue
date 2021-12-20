@@ -137,7 +137,7 @@ createDonationOrder(params.user, params.amount).then(res => {
   qrLoading.value = false
   // 开始计算时间
   startCalcTime();
-  // 开始进行轮询检测 默认进行120次检测（四分钟），之后跳出模态框让用户确定是否被点击
+  // 开始进行轮询检测 默认进行120次检测（四分钟），之后跳出模态框让用户主动确认是否被支付
   startCheckOrder(120);
 
 })
@@ -224,6 +224,7 @@ const startCheckOrder = (max: number) => {
   // 开始轮询
   checkOrderInterval.value = setInterval(checkOrder, 2000);
 }
+// 被取消挂载时候
 onUnmounted(()=>{
   // 关闭所有的定时器
   clearInterval(checkOrderInterval.value)

@@ -14,3 +14,4 @@ export enum OrderConstant {
     // 支付超时
     DONATION_ORDER_STATUS_TIMEOUT = 2,
 }
+
